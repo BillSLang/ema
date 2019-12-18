@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+Implementation-Title: emaApi
+Implementation-Version: 1.0.1
 Built-By: ljp
+Implementation-Vendor-Id: com.bill.ema
 Build-Jdk: 1.8.0_101
+Implementation-URL: 
 Created-By: Maven Integration for Eclipse
 
