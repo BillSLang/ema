@@ -31,8 +31,8 @@
     <dependencies>
         <!--依赖model模块-->
         <dependency>
-            <groupId>com.vanvov.hms</groupId>
-            <artifactId>model</artifactId>
+            <groupId>com.bill.ema</groupId>
+            <artifactId>emaModel</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

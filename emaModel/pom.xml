@@ -20,8 +20,8 @@
   <dependencies>
         <!-- api -->
         <dependency>
-            <groupId>com.vanvov.hms</groupId>
-            <artifactId>api</artifactId>
+            <groupId>com.bill.ema</groupId>
+            <artifactId>emaApi</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
