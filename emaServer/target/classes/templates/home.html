@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<#include '/head.html'>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../static/lib/layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+	<div class="layui-layout layui-layout-admin">
+		<div class="layui-header">
+			<div class="layui-logo">后台名称</div>
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item"><a href="javascript();">头部导航</a></li>
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item"><a href="">用户信息</a></li>
+			</ul>
+		</div>
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!--layui-sied-scroll设置滚轮，内容超出时，被hidden-->
+				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<li class="layui-nav-item"><a href="">侧边栏导航</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="layui-body">
+			<iframe src="" frameborder="0" height="100%" width="100%"></iframe>
+		</div>
+		<div class="layui-footer">
+			@ bill.com - ema 
+		</div>
+	</div>
+</body>
+<script src="../static/lib/layui/layui.all.js"></script>
+</html>
