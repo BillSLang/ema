@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>login</title>
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="../static/lib/layui/css/layui.css">
+	<style>
+	body{
+		line-height: 24px;
+		fornt:14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+		background-color: #F2F2F2;
+	}
+	.login-main{
+		width:375px;
+		margin:0 auto;
+		box-sizing:border-box;
+	}
+	.login-header{
+		text-align: center;
+	}
+	.login-box{
+		padding:20px;
+	}
+	.login-main header{
+		margin-top:150px;
+		height: 35px;
+		line-height: 35px;
+		font-size: 30px;
+		font-weight: 100;
+		text-align: center;
+	}
+	.img{
+		float:right;
+		height: 38px;
+	}
+	.link{
+	float: right;
+	margin:6px 0 4px 10px;
+	padding: 0 0 0 28px;
+	color:#009688;
+	}
+	
+	</style>
 </head>
 <body>
-<div>
+	<div class="login-main">
+		<header class="layui-elip login-header">登录</header>	
+		<form class="layui-form layui-form-pane">
 
-</div>
+			<div class="layui-form-item">				
+				<label class="layui-form-label layui-icon layui-icon-username"></label>
+				<div class="layui-input-block">
+					<input type="text" name="title" required lay-verify="required" placeholder="账号" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-password"></label>
+				<div class="layui-input-block">
+					<input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-vercode"></label>
+				<div class="layui-input-inline" style="width: 140px;" >	
+					<input type="password" name="title" required lay-verify="required" placeholder="图形验证码" autocomplete="off" class="layui-input">	
+				</div>
+				<img class="img" src="https://www.oschina.net/action/user/captcha" >		
+			</div>
+			<div class="layui-form-item">
+				<input type="checkbox" name="" title="记住密码" lay-skin="primary">
+				<a href="" class="link" ><span>忘记密码？</span></a>
+			</div>
+			<div class="layui-form-item">
+				<button class="layui-btn 6.	layui-btn-fluid" lay-submit lay-filter="">登录</button>
+			</div>
+			<div class="layui-form-item">				
+				<a href="" class="link" ><span>注册账号 </span></a>
+			</div>
+		</form>
+	</div>
 </body>
+<script src="../static/lib/layui/layui.all.js"></script>
 </html>

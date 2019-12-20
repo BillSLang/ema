@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="../static/lib/layui/css/layui.css">
+	<style>
+	body{
+		line-height: 24px;
+		fornt:14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
+		background-color: #F2F2F2;
+	}
+	.login-main{
+		width:375px;
+		margin:0 auto;
+		box-sizing:border-box;
+	}
+	.login-header{
+		text-align: center;
+	}
+	.login-box{
+		padding:20px;
+	}
+	.login-main header{
+		margin-top:150px;
+		height: 35px;
+		line-height: 35px;
+		font-size: 30px;
+		font-weight: 100;
+		text-align: center;
+	}
+	.get-vercode{
+		float:right;
+	}
+	.link{
+	float: right;
+	margin:6px 0 4px 10px;
+	padding: 0 0 0 28px;
+	color:#009688;
+	}
+	
+	</style>
+</head>
+<body>
+	<div class="login-main">
+		<header class="layui-elip login-header">注册</header>	
+		<form class="layui-form layui-form-pane">
+
+			<div class="layui-form-item">				
+				<label class="layui-form-label layui-icon layui-icon-cellphone"></label>
+				<div class="layui-input-block">
+					<input type="text" name="title" required lay-verify="required" placeholder="手机" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-vercode"></label>
+				<div class="layui-input-inline" style="width: 140px;" >	
+					<input type="password" name="title" required lay-verify="required" placeholder="验证码" autocomplete="off" class="layui-input">	
+				</div>
+				<button type="button" class="layui-btn layui-btn-primary get-vercode">获取验证码</button>		
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-password"></label>
+				<div class="layui-input-block">
+					<input type="password" name="title" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-password"></label>
+				<div class="layui-input-block">
+					<input type="password" name="title" required lay-verify="required" placeholder="确认密码" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-username"></label>
+				<div class="layui-input-block">
+					<input type="password" name="title" required lay-verify="required" placeholder="昵称" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+						
+			<div class="layui-form-item">
+				<button class="layui-btn 6.	layui-btn-fluid" lay-submit lay-filter="">注册</button>				
+			</div>
+
+			<div class="layui-form-item">
+				<a href="" class="link" ><span>用已有账号登录</span></a>
+			</div>
+		</form>
+	</div>
+</body>
+<script src="../static/lib/layui/layui.all.js"></script>
+</html>
