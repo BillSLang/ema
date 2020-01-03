@@ -1,0 +1,71 @@
+body {
+	line-height: 24px;
+	fornt: 14px Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial,
+		sans-serif;
+	background-color: #F2F2F2;
+}
+
+.login-main {
+	width: 375px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+.login-footer{
+	text-align: center;
+}
+.login-box {
+	border-radius: 5px; 
+	margin-top : 150px;
+	width: 400px;
+	background-color: #FFFFFF;
+	margin-top: 150px;
+}
+
+.login-header {
+	text-align: center;
+}
+
+.login-box {
+	padding: 20px;
+}
+
+.login-main header {
+	margin-bottom: 20px; height : 35px;
+	line-height: 35px;
+	font-size: 30px;
+	font-weight: 100;
+	text-align: center;
+	height: 35px;
+}
+
+.img {
+	float: right;
+	width:140px;
+	height: 38px;
+	
+}
+
+.link {
+	float: right;
+	margin: 6px 0 4px 10px;
+	padding: 0 0 0 28px;
+	color: #009688;
+}
+
+div a:hover {
+	color: #5FB878;
+}
+
+p {
+	color: #797979;
+	text-align: center;
+}
+
+p span {
+	padding: 0 5px;
+}
+
+p a {
+	color: #797979;
+	padding: 0 5px;
+}

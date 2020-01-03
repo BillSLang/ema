@@ -1,18 +1,19 @@
 package com.bill.ema.emaServer.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class HomeController {
-	
-	@RequestMapping("/")
+		
+	@RequestMapping(value= {"index.html","/"})
 	public String home() {
-		return "redirect:/login";
+		return "index";
 	}
 	
-	@RequestMapping("/login")
-	public String login() {
-		return "redirect:/login";
-	}
+	@RequestMapping("login.html")
+    public String login() {
+    	return "login";
+    }
+	
 }

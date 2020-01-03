@@ -9,11 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bill.ema.emaModel.dao.PermissionDao;
+import com.bill.ema.emaModel.dao.Role2PermissionDao;
 import com.bill.ema.emaModel.dao.RoleDao;
 import com.bill.ema.emaModel.dao.User2RoleDao;
 import com.bill.ema.emaModel.dao.UserDao;
 import com.bill.ema.emaModel.entity.Permission;
 import com.bill.ema.emaModel.entity.Role;
+import com.bill.ema.emaModel.entity.Role2Permission;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaModel.entity.User2Role;
 import com.bill.ema.emaServer.service.UserService;
@@ -26,6 +29,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 	
 	@Autowired
 	private User2RoleDao user2RoleDao;
+	
+	@Autowired
+	private PermissionDao permissionDao;
+	
+	@Autowired
+	private Role2PermissionDao role2PermissionDao;
 	
 	@Override
 	public User getByUsername(String username) {
@@ -61,9 +70,20 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 	}
 
 	@Override
-	public Set<Permission> getAllPermission(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Permission> getAllPermission(Integer id) {		
+		QueryWrapper<User2Role> query1 = new QueryWrapper();
+		query1.eq("user", id);
+		List<User2Role> list1 = user2RoleDao.selectList(query1);
+		Set<Permission> result = new HashSet();
+		for(User2Role data:list1) {
+			QueryWrapper<Role2Permission> query2 = new QueryWrapper();
+			query2.eq("roleId", data.getRoleId());
+ 			List<Role2Permission> list3 = role2PermissionDao.selectList(query2);
+ 			list3.stream().forEach(entity->{
+ 				result.add(permissionDao.selectById(entity.getPermissionId()));
+ 			});
+		}
+		return result;
 	}
 
 }

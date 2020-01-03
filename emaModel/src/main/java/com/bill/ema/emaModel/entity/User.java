@@ -3,6 +3,7 @@ package com.bill.ema.emaModel.entity;
 import java.util.Date;
 import java.util.Set;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -34,8 +35,5 @@ public class User {
     
     private String qq;
     
-    private Byte enabled;
-    
-    private Set<Role> roles;
-	
+    private Byte enabled;	
 }

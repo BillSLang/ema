@@ -9,11 +9,5 @@ import com.bill.ema.emaServer.service.LoginService;
 
 @Service
 public class LoginServiceImpl implements LoginService{
-
-	@Autowired
-	private PermissionDao permissionDao;
 	
-	@Override
-	public User getUserByUserName(String username) {		
-	}
 }
