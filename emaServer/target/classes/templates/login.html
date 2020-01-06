@@ -14,19 +14,19 @@
 			<div class="layui-form-item">				
 				<label class="layui-form-label layui-icon layui-icon-username"></label>
 				<div class="layui-input-block">
-					<input type="text" name="username" required lay-verify="required" placeholder="账号" autocomplete="off" class="layui-input">
+					<input type="text" name="username"  placeholder="账号" autocomplete="off" class="layui-input" lay-verify="required|username">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-password"></label>
 				<div class="layui-input-block">
-					<input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off" class="layui-input">
+					<input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input" lay-verify="required|password">
 				</div>
 			</div>
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-vercode"></label>
 				<div class="layui-input-inline" style="width: 140px;" >	
-					<input type="text" name="captcha" required lay-verify="required" placeholder="图形验证码" autocomplete="off" class="layui-input">	
+					<input type="text" name="captcha"  placeholder="图形验证码" autocomplete="off" class="layui-input" lay-verify="required|captcha">	
 				</div>
 				<img class="img" :src="src" >	
 			</div>
@@ -35,7 +35,7 @@
 				<a href="" class="link" ><span>忘记密码？</span></a>
 			</div>
 			<div class="layui-form-item">
-				<button class="layui-btn 6.	layui-btn-fluid" lay-submit lay-filter="login">登录</button>
+				<button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="login">登录</button>
 			</div>
 			<div class="layui-form-item">				
 				<a href="./register.html" class="link" ><span>注册账号 </span></a>

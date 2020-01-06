@@ -57,9 +57,11 @@ public class ShiroConfig {
 		//不需要拦截的访问
 		filterMap.put("/login.html", "anon");
 		filterMap.put("/login", "anon");
+		filterMap.put("/verify", "anon");
 		filterMap.put("/css/**", "anon");
 		filterMap.put("/lib/**", "anon");		
 		filterMap.put("/js/login/**", "anon");
+		filterMap.put("/js/common.js", "anon");
 		filterMap.put("/captcha.jpg", "anon");
 		filterMap.put("/**", "authc");		
 		

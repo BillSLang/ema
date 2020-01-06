@@ -2,6 +2,7 @@ package com.bill.ema.emaServer.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.bill.ema.emaCommon.response.R;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaServer.service.shiro.ShiroUtil;
 import com.google.code.kaptcha.Constants;
@@ -38,13 +40,17 @@ public class LoginController {
 		String text = producer.createText();
 		//生成图片验证码
 		BufferedImage image = producer.createImage(text);		
-		System.out.println(text);
 		//保存到shiro session
 		ShiroUtil.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY,text);
 		
 		ServletOutputStream out = response.getOutputStream();
 		ImageIO.write(image,"jpg",out);		
-		System.out.println("验证码："+text);
+	}
+	
+	@RequestMapping("/verify")
+	public R verifyCaptcha(@RequestBody @Validated Map<String,Object> param) {
+		System.out.println(param);
+		return R.OK();
 	}
 
 }
