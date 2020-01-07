@@ -12,8 +12,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping("login.html")
-    public String login() {
+    public String toLogin() {
     	return "login";
+    }
+	
+	@RequestMapping("register.html")
+    public String toRegister() {
+    	return "register";
     }
 	
 }

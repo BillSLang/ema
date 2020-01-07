@@ -5,6 +5,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import com.bill.ema.emaCommon.utils.CONSTANT;
 import com.bill.ema.emaModel.entity.User;
 
 public class ShiroUtil {
@@ -71,10 +72,13 @@ public class ShiroUtil {
 	
 	//验证码错误次数
 	public static Integer getRetryNum() {
-		return null;
+		Object object = getSessionAttribute(CONSTANT.RETRY_NUM);
+		if(object==null)
+			return 0;
+		return (Integer)object;
 	}
 	
 	public static void setRetryNum(int num) {
-		//setSessionAttribute();
+		setSessionAttribute(CONSTANT.RETRY_NUM, num);
 	}
 }

@@ -22,6 +22,13 @@ public class R extends HashMap<String,Object>{
 		return ERROR(STATUSCODE.FAIL.getCode(),msg);
 	}
 	
+	public static R ERROR(STATUSCODE sc) {
+		R r = new R();
+		r.put("code", sc.getCode());
+		r.put("msg", sc.getMsg());
+		return r;
+	}
+	
 	public static R ERROR(int code,String msg) {
 		R r = new R();
 		r.put("code", code);

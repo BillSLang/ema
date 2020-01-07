@@ -10,8 +10,8 @@ import com.bill.ema.emaModel.entity.Role;
 @Service("roleService")
 public interface RoleService extends IService<Role>{
 	Role getByName(String name);
-	Set<Role> getByPermissionId(Integer permissionId);
-	Set<Role> getByPermissionName(String permissionName);
-	Set<Role> getByUserId(Integer userId);
-	Set<Role> getByUsername(String username);
+	Set<Role> listByPermissionId(Integer permissionId);
+	Set<Role> listByPermissionName(String permissionName);
+	Set<Role> listByUserId(Integer userId);
+	Set<Role> listByUsername(String username);
 }

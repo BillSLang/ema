@@ -12,10 +12,14 @@ var vm = new Vue({
 	methods:{
 		submit(){
 			form.on('submit(login)', data=>{				
-				var param = JSON.stringify(data.field);
-				console.log(baseURL)
-				$.post(baseURL + "/ema/verify",data.field)
-				return false;// 阻止表单跳转
+				$.ajax({
+					url:baseURL + "/login",
+					type:"POST",
+					data:data.field,
+					success(r){
+						console.log(r);
+					},
+				})
 			})
 		},
 		refreshCode(){

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -20,6 +21,7 @@ import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaModel.entity.User2Role;
 import com.bill.ema.emaServer.service.RoleService;
 
+@Service
 public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleService{
 	
 	@Autowired
@@ -42,7 +44,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleSe
 	}
 
 	@Override
-	public Set<Role> getByPermissionId(Integer permissionId) {
+	public Set<Role> listByPermissionId(Integer permissionId) {
 		QueryWrapper<Role2Permission> query1 = new QueryWrapper<Role2Permission>();
 		query1.eq("permissionId",permissionId);
 		Set<Role> list = new HashSet<Role>();
@@ -54,7 +56,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleSe
 	}
 
 	@Override
-	public Set<Role> getByPermissionName(String permissionName) {
+	public Set<Role> listByPermissionName(String permissionName) {
 		QueryWrapper<Permission> query0 = new QueryWrapper<Permission>();
 		query0.eq("name", permissionName);
 		Permission perimission = permissionDao.selectOne(query0);
@@ -71,7 +73,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleSe
 	}
 
 	@Override
-	public Set<Role> getByUserId(Integer userId) {
+	public Set<Role> listByUserId(Integer userId) {
 		QueryWrapper<User2Role> query1 = new QueryWrapper<User2Role>();
 		query1.eq("userId",userId);
 		Set<Role> list = new HashSet<Role>();
@@ -83,7 +85,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleSe
 	}
 
 	@Override
-	public Set<Role> getByUsername(String username) {
+	public Set<Role> listByUsername(String username) {
 		QueryWrapper<User> query0 = new QueryWrapper<User>();
 		query0.eq("name", username);
 		User user = userDao.selectOne(query0);
