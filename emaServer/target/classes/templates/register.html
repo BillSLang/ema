@@ -10,14 +10,31 @@
 	<div class="register-box">
 		<header class="layui-elip register-header">注册</header>	
 		<form id="registerForm" class="layui-form layui-form-pane">
-
+			
 			<div class="layui-form-item">				
 				<label class="layui-form-label layui-icon layui-icon-cellphone"></label>
 				<div class="layui-input-block">
-					<input type="text" name="username" lay-verify="required|username" placeholder="用户名" autocomplete="off" class="layui-input">
+					<input type="text" v-model="username" @change="isUsernameExist" name="username" lay-verify="required|username" placeholder="用户名" autocomplete="off" class="layui-input">
 				</div>
-			</div>			
-
+				<div v-if="flag1==true">
+					<div class="error-tips">				
+						<label class="fa fa-exclamation-circle" v-text=" tips1"></label>				
+					</div>
+				</div>
+			</div>	
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-rate"></label>
+				<div class="layui-input-block" >	
+					<input type="text" name="email" v-model="email" @change="isEmailExist" lay-verify="required|email" placeholder="邮箱" autocomplete="off" class="layui-input">	
+				</div>
+				<div v-if="flag2==true">
+					<div class="error-tips">				
+						<label class="fa fa-exclamation-circle" v-text=" tips2"></label>				
+					</div>
+				</div>
+			</div>						
+			
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-password"></label>
 				<div class="layui-input-block">
@@ -28,7 +45,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-password"></label>
 				<div class="layui-input-block">
-					<input type="password" name="affPassword" lay-verify="required|affPassword" placeholder="确认密码" autocomplete="off" class="layui-input">
+					<input type="password" lay-verify="required|affPassword" placeholder="确认密码" autocomplete="off" class="layui-input">
 				</div>
 			</div>
 
@@ -37,22 +54,15 @@
 				<div class="layui-input-block">
 					<input type="text" name="name" lay-verify="required|name" placeholder="昵称" autocomplete="off" class="layui-input">
 				</div>
-			</div>
-					
-			<div class="layui-form-item">
-				<label class="layui-form-label layui-icon layui-icon-rate"></label>
-				<div class="layui-input-block" >	
-					<input type="text" name="email" lay-verify="required|email" placeholder="邮箱" autocomplete="off" class="layui-input">	
-				</div>
-			</div>		
+			</div>								
 						
 			<div class="layui-form-item">
 				<button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="register">注册</button>				
 			</div>
 
 			<div class="layui-form-item">
-				<a href="${request.contextPath}/login.html" class="link" ><span>用已有账号登录</span></a>
-			</div>
+				<router-link to="/login" class="link" ><span>用已有账号登录</span></router-link>
+			</div>			
 		</form>
 		</div>		
 	</div>

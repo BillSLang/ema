@@ -28,17 +28,14 @@
 				<div class="layui-input-inline" style="width: 140px;" >	
 					<input type="text" name="captcha"  placeholder="图形验证码" autocomplete="off" class="layui-input" lay-verify="required|captcha">	
 				</div>
-				<img class="img" :src="src" >	
+				<img class="img" :src="src" @click="refreshCode">	
 			</div>
-			<div class="layui-form-item">
-				<input type="checkbox" name="" title="记住密码" lay-skin="primary">
-				<a href="" class="link" ><span>忘记密码？</span></a>
-			</div>
+			
 			<div class="layui-form-item">
 				<button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="login">登录</button>
 			</div>
 			<div class="layui-form-item">				
-				<a href="${request.contextPath}/register.html" class="link" ><span>注册账号 </span></a>
+				<router-link to="/register" class="link" ><span>注册账号 </span></router-link>
 			</div>
 		</form>			
 		</div>

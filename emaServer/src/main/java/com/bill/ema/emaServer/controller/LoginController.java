@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bill.ema.emaCommon.response.R;
+import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaServer.service.LoginService;
 import com.bill.ema.emaServer.service.shiro.ShiroUtil;
 import com.google.code.kaptcha.Constants;
@@ -37,9 +41,21 @@ public class LoginController {
 	}
 	
 	@PostMapping("/register")
-	public R register(@RequestParam @Validated Map<String,Object> param) {
-		System.out.println(param);		
-		return loginService.authentication(param); 
+	public R register(@RequestBody @Validated User user) {
+		System.out.println(user);		
+		return loginService.register(user); 
+	}
+	
+	@GetMapping("/verify/isUsernameExist/{username}")
+	public R isUsernameExist(@PathVariable @Validated String username) {
+		System.out.println(username);
+		return loginService.verifyUseranme(username);
+	}
+	
+	@GetMapping("/verify/isEmailExist/{email}")
+	public R isEmailExist(@PathVariable @Validated String email) {
+		System.out.println(email);
+		return loginService.verifyEmail(email);
 	}
 	
 	@RequestMapping("captcha.jpg")

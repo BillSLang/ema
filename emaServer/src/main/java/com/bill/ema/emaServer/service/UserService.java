@@ -11,6 +11,7 @@ import com.bill.ema.emaModel.entity.User;
 @Service("userService")
 public interface UserService extends IService<User>{
 	User getByUsername(String username);
+	User getByEmail(String email);
 	Set<User> getByRoleId(Integer roleId);
 	Set<User> getByRoleName(String roleName);
 	Set<Permission> getAllPermission(Integer id);

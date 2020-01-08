@@ -35,5 +35,5 @@ public class User {
     
     private String qq;
     
-    private Byte enabled;	
+    private Byte enabled = 0;	
 }

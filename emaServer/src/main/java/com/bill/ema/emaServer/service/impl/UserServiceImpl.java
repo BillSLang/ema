@@ -42,6 +42,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 		query.eq("username", username);		
 		return baseMapper.selectOne(query);
 	}
+	
+	@Override
+	public User getByEmail(String email) {
+		QueryWrapper<User> query = new QueryWrapper<User>();
+		query.eq("email", email);		
+		return baseMapper.selectOne(query);
+	}
 
 	@Override
 	public Set<User> getByRoleId(Integer roleId) {

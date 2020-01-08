@@ -16,15 +16,18 @@ import org.springframework.stereotype.Service;
 
 import com.bill.ema.emaCommon.response.R;
 import com.bill.ema.emaCommon.response.STATUSCODE;
-import com.bill.ema.emaModel.dao.PermissionDao;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaServer.service.LoginService;
+import com.bill.ema.emaServer.service.UserService;
 import com.bill.ema.emaServer.service.shiro.ShiroUtil;
 import com.google.code.kaptcha.Constants;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
+	@Autowired
+	private UserService userService;
+	
 	@Override
 	public R authentication(Map<String, Object> param) {
 		// 校验验证码
@@ -59,6 +62,34 @@ public class LoginServiceImpl implements LoginService {
 			ShiroUtil.setRetryNum(0);
 			// 写日志
 		}
+		return R.OK("登录成功");
+	}
+
+	@Override
+	public R register(User user) {
+		if(userService.getByUsername(user.getUsername())!=null) {
+			return R.ERROR(STATUSCODE.USERNAMEEXIST);
+		}
+		String passwrod = ShiroUtil.sha256(user.getPassword(), user.getUsername());
+		user.setPassword(passwrod);
+		userService.save(user);
+		System.out.println("202001081050测试注册功能1"+user);
+		return R.OK("注册成功");
+	}
+
+	@Override
+	public R verifyUseranme(String username) {
+		if(userService.getByUsername(username)!=null)
+			return R.ERROR(STATUSCODE.USERNAMEEXIST);
+		System.out.println(username);
+		return R.OK();
+	}
+
+	@Override
+	public R verifyEmail(String email) {
+		if(userService.getByEmail(email)!=null)
+			return R.ERROR(STATUSCODE.EMAILEXIST);
+		System.out.println(email);
 		return R.OK();
 	}
 

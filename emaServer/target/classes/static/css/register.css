@@ -10,6 +10,11 @@ body {
 	margin: 0 auto;
 	box-sizing: border-box;
 }
+.error-tips{
+	text-align:left;
+	color:#ff5b5b;
+	font-size: 14px;
+}
 .register-box {
 	border-radius: 5px; 
 	margin-top : 150px;

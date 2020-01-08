@@ -17,7 +17,9 @@ var vm = new Vue({
 					type:"POST",
 					data:data.field,
 					success(r){
-						console.log(r);
+						layer.msg(r.msg);
+						if(r.code==0)
+							window.location.href="./index.html";
 					},
 				})
 			})
