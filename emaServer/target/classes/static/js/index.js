@@ -9,10 +9,10 @@ var vm = new Vue({
 	methods:{
 		route(){
 			router.map('/hello',function(){
-				iframe.setAttribute('src','./register.html')
+				iframe.setAttribute('src','user.html')
 			}),
 			router.map('/user',function(){
-				iframe.setAttribute('src','./hello.html')
+				iframe.setAttribute('src','hello.html')
 			})
 		}
 	}

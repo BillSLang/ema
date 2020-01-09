@@ -46,18 +46,18 @@ public class ShiroConfig {
 		//设定用户没有登录认证时的跳转链接、没有授权时的跳转链接
 		shiroFilter.setLoginUrl("/login.html");
 		//shiroFilter.setSuccessUrl("/index");
-		shiroFilter.setUnauthorizedUrl("login");
+		shiroFilter.setUnauthorizedUrl("/login.html");
 		
 		//过滤器链配置
 		Map<String,String> filterMap = new LinkedHashMap<>();
 		
 		//退出 logout地址，shiro去清楚session
 		filterMap.put("/logout", "logout");
-		
+        filterMap.put("/", "anon");
+
 		//不需要拦截的访问
 		filterMap.put("/login.html", "anon");
-		filterMap.put("/register.html", "anon");
-		filterMap.put("/hello.html", "anon");
+		filterMap.put("/register.html", "anon");		
 		filterMap.put("/register", "anon");
 		filterMap.put("/login", "anon");
 		filterMap.put("/css/**", "anon");
@@ -65,6 +65,7 @@ public class ShiroConfig {
 		filterMap.put("/verify/**", "anon");
 		filterMap.put("/fonts/**", "anon");
 		filterMap.put("/js/*", "anon");
+		filterMap.put("/templates/*", "anon");
 		filterMap.put("/captcha.jpg", "anon");
 		filterMap.put("/**", "authc");		
 		
