@@ -1,4 +1,6 @@
-var form = layui.form;
-var layer = layui.layer;
-var baseURL = "../../ema";
-var element = layui.element;
+(function(){
+	window.form = layui.form;
+	window.layer = layui.layer;
+	window.baseURL = "../../ema";
+	window.element = layui.element;	
+})();

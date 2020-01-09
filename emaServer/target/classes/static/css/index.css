@@ -1,0 +1,18 @@
+.layui-layout-admin .layui-header{
+		border-bottom: 1px solid #f6f6f6;
+	    box-sizing: border-box;
+	    width: 100%;
+	}
+	.layui-layout-admin .layui-logo{
+		border-bottom: 1px solid #393d49;		
+	}
+	.layui-nav .layui-nav-child dd{
+		margin:0 auto;
+		text-align:center;
+	}
+	dd a{		
+		cursor:pointer;
+	}
+	dd a:active{
+		background-color:#009688 !important;
+	}

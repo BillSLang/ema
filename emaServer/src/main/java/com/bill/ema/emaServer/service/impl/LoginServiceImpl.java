@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 		// 校验验证码
 		String kaptcha = ShiroUtil.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
 		Integer retry = ShiroUtil.getRetryNum();
-		if (retry > 0 && !kaptcha.equals(param.get("captcha")))
+		if (retry > 0||!kaptcha.equals((String)param.get("captcha")))
 			return R.ERROR(STATUSCODE.INVALIDCAPTCHA);
 		Subject subject = SecurityUtils.getSubject();
 		try {

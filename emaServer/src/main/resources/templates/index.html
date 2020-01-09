@@ -3,16 +3,7 @@
 <head>
 	<#include 'head.html'>
 	<title></title>
-	<style>
-	.layui-layout-admin .layui-header{
-		border-bottom: 1px solid #f6f6f6;
-	    box-sizing: border-box;
-	    width: 100%;
-	}
-	.layui-layout-admin .layui-logo{
-		border-bottom: 1px solid #393d49;		
-	}
-	</style>
+	<link rel="stylesheet" type="text/css" href="${request.contextPath}/css/index.css">
 </head>
 <body id="index" class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -25,7 +16,7 @@
 				<ul class="layui-nav layui-layout-right">
 					<li class="layui-nav-item"><a href=""><i class="layui-icon layui-icon-notice"></i></a></li>
 					<li class="layui-nav-item">
-					    <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+					    <a href="#"><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
 					    <dl class="layui-nav-child">
 					      <dd><a href="javascript:;">修改信息</a></dd>
 					      <dd><a href="javascript:;">安全管理</a></dd>
@@ -50,15 +41,15 @@
 						</dl>
 					</li>
 					<li data-name="user" class="layui-nav-item">
-						<a href="" >
+						<a href="javascript:;" >
 							<i class="layui-icon layui-icon-user">
 								<cite>用户</cite>
 							</i>
 						</a>
 						<dl class="layui-nav-child">
-							<dd>1</dd>
-							<dd>1</dd>
-							<dd>1</dd>
+							<dd><a href="#/user">用户管理</a></dd>
+							<dd><a href="#">角色管理</a></dd>
+							<dd><a href="#">权限管理</a></dd>
 						</dl>
 					</li>
 					<li data-name="set" class="layui-nav-item">
@@ -80,12 +71,18 @@
 							</i>
 						</a>						
 					</li>
+					<li data-name="est" class="layui-nav-item">
+						<a href="#/hello" >
+							<i class="layui-icon layui-icon-auz">
+								<cite>测试</cite>
+							</i>
+						</a>						
+					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="layui-body">
-			<iframe src="" frameborder="0" height="100%" width="100%">
-			<#include >
+			<iframe id="iframe" src="" frameborder="0" height="100%" width="100%">
 			</iframe>
 		</div>
 		<div class="layui-footer">

@@ -18,8 +18,11 @@ var vm = new Vue({
 					data:data.field,
 					success(r){
 						layer.msg(r.msg);
+						console.log(r)
 						if(r.code==0)
 							window.location.href="./index.html";
+						else
+							vm.refreshCode();
 					},
 				})
 			})

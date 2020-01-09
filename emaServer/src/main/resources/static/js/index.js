@@ -1,9 +1,19 @@
+var iframe = document.getElementById('iframe');
 var vm = new Vue({
 	el:'#index',
-	data:{}
-	,created(){
+	created(){
+		this.route();
+		router.render();	
 		element.render();
-	},methods:{
-		
+	},
+	methods:{
+		route(){
+			router.map('/hello',function(){
+				iframe.setAttribute('src','./register.html')
+			}),
+			router.map('/user',function(){
+				iframe.setAttribute('src','./hello.html')
+			})
+		}
 	}
 })
