@@ -5,7 +5,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-import com.bill.ema.emaCommon.utils.CONSTANT;
+import com.bill.ema.emaCommon.util.CONSTANT;
 import com.bill.ema.emaModel.entity.User;
 
 public class ShiroUtil {

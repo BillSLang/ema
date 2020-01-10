@@ -2,13 +2,17 @@ package com.bill.ema.emaServer.service.impl;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bill.ema.emaCommon.util.PageUtil;
+import com.bill.ema.emaCommon.util.QueryUtil;
 import com.bill.ema.emaModel.dao.PermissionDao;
 import com.bill.ema.emaModel.dao.Role2PermissionDao;
 import com.bill.ema.emaModel.dao.RoleDao;
@@ -91,6 +95,12 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
  			});
 		}
 		return result;
+	}
+	
+	public PageUtil queryPage(Map<String,Object> param){
+		IPage<User> page = new QueryUtil<User>().getQueryPage(param);
+		System.out.println(page);
+		return null;
 	}
 
 }

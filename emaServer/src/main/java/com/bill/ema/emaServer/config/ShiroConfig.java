@@ -53,8 +53,6 @@ public class ShiroConfig {
 		
 		//退出 logout地址，shiro去清楚session
 		filterMap.put("/logout", "logout");
-        filterMap.put("/", "anon");
-
 		//不需要拦截的访问
 		filterMap.put("/login.html", "anon");
 		filterMap.put("/register.html", "anon");		

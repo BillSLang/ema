@@ -61,7 +61,7 @@ public class R extends HashMap<String,Object>{
 	
 	public static R map(String key,Object data) {
 		R r = new R();
-		r.put("key", data);
+		r.put(key, data);
 		return r;
 	}	
 }

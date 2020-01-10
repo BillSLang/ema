@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.bill.ema.emaCommon.response.STATUSCODE;
-import com.bill.ema.emaCommon.utils.CONSTANT;
+import com.bill.ema.emaCommon.util.CONSTANT;
 import com.bill.ema.emaModel.entity.Role;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaServer.service.RoleService;
