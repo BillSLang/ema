@@ -21,6 +21,6 @@ public class UserController {
 	@RequestMapping("/list")
 	public R list(@RequestParam @Validated Map<String,Object> param) {
 		System.out.println(param);		
-		return R.OK(userService.list()); 
+		return R.OK(userService.queryPage(param)); 
 	}
 }

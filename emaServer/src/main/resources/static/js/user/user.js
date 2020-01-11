@@ -4,10 +4,14 @@ var vm = new Vue({
 		
 	},
 	mounted(){
-		this.initTable();
+		this.initForm();
+		this.initTable();		
 	}
 	,methods:{
-		initTable(){						
+		initForm(){
+			form.render();
+		}
+		,initTable(){						
 			// 方法渲染：
 			table.render({
 				title:"用户管理",
@@ -27,10 +31,10 @@ var vm = new Vue({
 				},
 				skin:'row',
 				even:true,
-				size:'lg',
+				size:'sm',
 				loading:false,
 				url:baseURL+'/user/list',
-				height:450,
+				height:500,
 				page:true,
 				cols:  [[ // 标题栏
 					{field:'all',title:'全选',width:60,type:'checkbox'}
@@ -40,7 +44,16 @@ var vm = new Vue({
 					,{field: 'email', title: '邮箱'}
 					,{field: 'createTime', title: '创建时间'}
 					,{field: 'updateTime', title: '修改时间'}
-				]]
+				]],
+				parseData: function(res){ //res 即为原始返回的数据
+					console.log(res)
+				    return {
+				      "code": res.code, //解析接口状态
+				      "msg": res.msg, //解析提示文本
+				      "count": res.data.totalCount, //解析数据长度
+				      "data": res.data.list //解析数据列表
+				    };
+				  }
 			});
 		}
 	}

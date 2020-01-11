@@ -14,6 +14,12 @@ var vm = new Vue({
 			router.map('/user',function(){
 				iframe.setAttribute('src','hello.html')
 			})
+		},
+		menuShrink(){
+			var isShow = true;
+			$('.layui-icon-shrink-right').click(function(){
+				
+			})
 		}
 	}
 })

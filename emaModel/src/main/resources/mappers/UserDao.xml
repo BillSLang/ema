@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bill.ema.emaModel.dao.UserDao" >
-<select id=""></select>	
+<select id="selectForPage" resultType="com.bill.ema.emaModel.entity.User">
+	SELECT * 
+	FROM user
+	WHERE enabled=0
+	<if test="param.username!=null and param.username!=''">
+	AND username = #{param.username}
+	</if>
+	<if test="param.phone!=null and param.phone!=''">
+	AND phone = #{param.phone}
+	</if>
+	<if test="param.email!=null and param.email!=''">
+	AND email = #{param.email}
+	</if>
+	<if test="param.gender!=null and param.gender!=''">
+	AND gender = #{param.gender}
+	</if>
+	<if test="param.createTime!=null and param.createTime!=''">
+	AND createtime = #{param.createTime}
+	</if>
+	<if test="param.updateTime!=null and param.updateTime!=''">
+	AND updatetime = #{param.updateTime}
+	</if>
+</select>	
 </mapper>

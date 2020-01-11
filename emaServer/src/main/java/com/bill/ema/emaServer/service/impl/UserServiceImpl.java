@@ -99,8 +99,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 	
 	public PageUtil queryPage(Map<String,Object> param){
 		IPage<User> page = new QueryUtil<User>().getQueryPage(param);
-		System.out.println(page);
-		return null;
+		List<User> list = baseMapper.selectForPage(page, param);
+		page.setRecords(list);
+		return new PageUtil(page);
 	}
 
 }
