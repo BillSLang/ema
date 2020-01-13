@@ -2,6 +2,7 @@ var iframe = document.getElementById('iframe');
 var vm = new Vue({
 	el:'#index',
 	created(){
+		console.log("test")
 		this.route();
 		router.render();	
 		element.render();
@@ -16,6 +17,7 @@ var vm = new Vue({
 			})
 		},
 		menuShrink(){
+			console.log("test")
 			var isShow = true;
 			$('.layui-icon-shrink-right').click(function(){
 				
