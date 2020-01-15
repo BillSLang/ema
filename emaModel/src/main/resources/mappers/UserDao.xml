@@ -6,13 +6,13 @@
 	FROM user
 	WHERE enabled=0
 	<if test="param.username!=null and param.username!=''">
-	AND username = #{param.username}
+	AND username LIKE CONCAT ('%',#{param.username},'%')
 	</if>
 	<if test="param.phone!=null and param.phone!=''">
-	AND phone = #{param.phone}
+	AND phone LIKE CONCAT ('%',#{param.phone},'%') 
 	</if>
 	<if test="param.email!=null and param.email!=''">
-	AND email = #{param.email}
+	AND email LIKE CONCAT ('%',#{param.email},'%') 
 	</if>
 	<if test="param.gender!=null and param.gender!=''">
 	AND gender = #{param.gender}

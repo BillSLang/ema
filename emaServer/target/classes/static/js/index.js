@@ -6,6 +6,7 @@ var vm = new Vue({
 		this.route();
 		router.render();	
 		element.render();
+
 	},
 	methods:{
 		route(){
@@ -14,7 +15,7 @@ var vm = new Vue({
 			}),
 			router.map('/user',function(){
 				iframe.setAttribute('src','hello.html')
-			})
+			})			
 		},
 		menuShrink(){
 			console.log("test")

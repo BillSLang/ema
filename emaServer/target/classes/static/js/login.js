@@ -33,19 +33,27 @@ var vm = new Vue({
 			form.verify({
 				username(value,item){
 					var username = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
-					if(!username.test(value))
+					if(!username.test(value)){
+						vm.refreshCode();	
 						return "账号不正确";
+					}
 				},
 				password(value,item){
 					var password = /^[a-zA-Z]\w{5,17}$/;
 					
-					if(!password.test(value))
+					if(!password.test(value)){
+						vm.refreshCode();
 						return "密码错误";
+						
+					}
 				},captcha(value,item){
 					var captcha = /^[(a-zA-Z)+0-9+]{5}$/;
-					if(!captcha.test(value))
+					if(!captcha.test(value)){
+						vm.refreshCode();
 						return "验证码错误";
+					}
 				}
+	
 			})
 		}
 	}

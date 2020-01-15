@@ -41,26 +41,30 @@
 						<label class="layui-form-label">用户名</label>
 						<div class="layui-input-block">
 							<input type="text" name="username" placeholder="用户名"
-								autocomplete="off" class="layui-input">
+								v-model="data.username" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-inline">
 						<label class="layui-form-label">邮箱</label>
 						<div class="layui-input-block">
 							<input type="text" name="email" placeholder="邮箱"
-								autocomplete="off" class="layui-input">
+								v-model="data.email" autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-inline">
 						<label class="layui-form-label">性别</label>
 						<div class="layui-input-block">
-							<select name="sex">
+							<select name="sex" v-model="data.gender">
 								<option value="0">无</option>
 								<option value="1">男</option>
 								<option value="2">女</option>
 							</select>							
 						</div>						
-					</div>					
+					</div>	
+					<div class="layui-inline" style="float:right;">				
+						<button class="layui-btn" type="button" @click="submit()" >查询</button>
+						<button class="layui-btn" type="button" @click="refresh()" >刷新</button>
+					</div>
 				</div>
 			</div>
 			<div class="layui-card-body" style="height:530px;">							
@@ -68,8 +72,15 @@
 				</table>				
 			</div>
 		</div>
-	</div>
+	</div>	
 </body>
+	<script type="text/html" id="toolbar" >
+		<div class="layui-btn-container"> 		
+  			<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+  	 		<button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+   			<button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
+ 		</div>
+	</script>
 	<script type="text/javascript" src="${request.contextPath}/js/login.js"></script>
 	<script type="text/javascript" src="${request.contextPath}/js/user/user.js"></script>
 </html>
