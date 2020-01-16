@@ -10,7 +10,9 @@ var vm = new Vue({
 	},
 	mounted(){
 		this.initForm();
-		this.initTable();		
+		this.initTable();	
+		this.tableToolbarEvent();
+		this.tableCheckboxEvent()
 	}
 	,methods:{
 		getParam(){
@@ -32,6 +34,29 @@ var vm = new Vue({
 					curr:1
 				}
 			});			
+		},
+		tableToolbarEvent(){
+			table.on('toolbar(test)', function(obj){
+				  var checkStatus = table.checkStatus(obj.config.id);
+				  switch(obj.event){
+				    case 'add':
+				      layer.msg('添加');
+				    break;
+				    case 'delete':
+				      layer.msg('删除');
+				    break;
+				    case 'update':
+				      layer.msg('编辑');
+				    break;
+				  };
+			});
+		},
+		tableCheckboxEvent(){
+			table.on('checkbox(enabled)', function(obj){
+				  console.log(obj.checked); //当前是否选中状态
+				  console.log(obj.data); //选中行的相关数据
+				  console.log(obj.type); //如果触发的是全选，则为：all，如果触发的是单选，则为：one
+				});
 		},
 		initForm(){
 			form.render();
@@ -63,7 +88,7 @@ var vm = new Vue({
 					,{field: 'createTime', title: '创建时间'}
 					,{field: 'updateTime', title: '修改时间'}
 					,{field:'enabled', title: '启动状态', width: 90,align:'center'
-					,templet: row=>'<input type="checkbox" name="zzz" lay-skin="switch" lay-text="开启|关闭">'}					
+					,templet: row=>'<input type="checkbox" name="zzz" lay-filter="enabled" lay-skin="switch" lay-text="开启|关闭">'}					
 				]],
 				parseData: function(res){ // res 即为原始返回的数据
 					console.log(res)
