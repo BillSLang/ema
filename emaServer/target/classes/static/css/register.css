@@ -59,7 +59,9 @@ p {
 	color: #797979;
 	text-align: center;
 }
-
+a{
+	cursor:pointer;
+}
 p span {
 	padding: 0 5px;
 }

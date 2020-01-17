@@ -17,6 +17,9 @@ var vm = new Vue({
 	,methods:{
 		initForm(){
 			form.render(null,'test0');
+		},exportData(){
+			console.log(this.tableIns.config.cols)
+			table.exportFile(this.tableIns.config.id, this.tableIns.config.cols, 'xls'); //默认导出 csv，也可以为：xls		}
 		},initTable(){						
 			// 方法渲染：
 		  this.tableIns = table.render({
@@ -24,7 +27,7 @@ var vm = new Vue({
 				title:"用户管理",
 				elem:'#userTable',
 				toolbar: '#toolbar',
-				defaultToolbar: ['filter', 'print', 'exports', {
+				defaultToolbar: ['filter','print',  {
 					    title: '提示' // 标题
 					    ,layEvent: 'LAYTABLE_TIPS' // 事件名，用于 toolbar 事件中使用
 					    ,icon: 'layui-icon-tips' // 图标类名
@@ -57,8 +60,7 @@ var vm = new Vue({
 				    };
 				  }
 			});
-		},
-		getParam(){
+		},getParam(){
 			console.log(this.data)
 			var param = {};
 			for(var key in this.data){
@@ -66,22 +68,21 @@ var vm = new Vue({
 			}
 			console.log(param)
 			return param;
-		},
-		refresh(){
+		},refresh(){
 			this.tableIns.reload({where:null});
-		},
-		submit(){			
+		},submit(){			
 			this.tableIns.reload({
 				where:this.getParam(),
 				page:{
 					curr:1
 				}
 			});			
-		},
-		toolbarEvent(){
+		},toolbarEvent(){
 			table.on('toolbar(test)', function(obj){
-				  var checkStatus = table.checkStatus(obj.config.id);
 				  switch(obj.event){
+				  	case 'export':
+				  		vm.exportData();
+				  	break;
 				    case 'add':
 				      layer.msg('添加');
 				    break;
@@ -92,15 +93,23 @@ var vm = new Vue({
 				      layer.msg('编辑');
 				    break;
 				  };
+			});		
+		},checkboxEvent(){						
+			table.on('row(test)', row=>{
+				var currId = row.data.id;	
+				var enabled = false;
+				var selected = false;
+				form.on('switch(enabled)', data=>{
+					enabled = data.elem.checked;				
+				});
+				form.on('checkbox(selected)',data=>{
+					selected = data.elem.checked;				
+				});
+				console.log("row:"+currId);
+				console.log("enabled:"+enabled)
+				console.log("switch:"+selected)
 			});
-		},
-		checkboxEvent(){
-			form.on('switch(enabled)', function(data){
-				console.log(data.elem);
-			});
-			form.on('checkbox(selected)',function(data){
-				console.log(data.elem);
-			});
+			
 		}
 	}
 })

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 	<title>用户管理</title>
-	<#include 'head.html'>
+	<#include '../head.html'>
 	<style>
 	.layui-fluid{
 		padding:15px;
@@ -69,12 +69,12 @@
 					<table id="userTable" class="layui-table" lay-filter="test">			
 					</table>				
 				</div>
-				<input type="checkbox" name="zzz" lay-filter="enabled" lay-skin="switch" lay-text="开启|关闭">
 		</div>
 	</div>	
 </body>
 	<script type="text/html" id="toolbar" >
-		<div class="layui-btn-container"> 		
+		<div class="layui-btn-container">
+			<button class="layui-btn layui-btn-sm" lay-event="export">导出</button> 		
   			<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
   	 		<button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
    			<button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>
