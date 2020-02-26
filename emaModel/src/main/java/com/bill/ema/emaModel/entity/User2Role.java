@@ -8,10 +8,11 @@ import lombok.Data;
 @Data
 @TableName(value="user2role")
 public class User2Role {
-
-	@TableId(value="user")
-	private Integer uerId;
 	
-	@TableId(value="role")
+	@TableId
+	private Integer id;
+	
+	private Integer userId;
+	
 	private Integer roleId;
 }

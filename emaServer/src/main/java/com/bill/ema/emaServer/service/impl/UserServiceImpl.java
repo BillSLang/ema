@@ -1,5 +1,8 @@
 package com.bill.ema.emaServer.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -7,10 +10,12 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bill.ema.emaCommon.util.Constant;
 import com.bill.ema.emaCommon.util.PageUtil;
 import com.bill.ema.emaCommon.util.QueryUtil;
 import com.bill.ema.emaModel.dao.PermissionDao;
@@ -23,7 +28,12 @@ import com.bill.ema.emaModel.entity.Role;
 import com.bill.ema.emaModel.entity.Role2Permission;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaModel.entity.User2Role;
+import com.bill.ema.emaServer.service.PermissionService;
+import com.bill.ema.emaServer.service.Role2PermissionService;
+import com.bill.ema.emaServer.service.RoleService;
+import com.bill.ema.emaServer.service.User2RoleService;
 import com.bill.ema.emaServer.service.UserService;
+import com.bill.ema.emaServer.service.shiro.ShiroUtil;
 
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserService{
@@ -32,7 +42,22 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 	private RoleDao roleDao;
 	
 	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private PermissionService permissionService;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
 	private User2RoleDao user2RoleDao;
+	
+	@Autowired
+	private User2RoleService user2RoleService;
+	
+	@Autowired
+	private Role2PermissionService role2PermissionService;
 	
 	@Autowired
 	private PermissionDao permissionDao;
@@ -61,7 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 		List<User2Role> list1 = user2RoleDao.selectList(query1);
 		Set<User> list = new HashSet();
 		for(User2Role data:list1) {
-			list.add(baseMapper.selectById(data.getUerId()));
+			list.add(baseMapper.selectById(data.getUserId()));
 		}
 		return list;
 	}
@@ -75,7 +100,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 		List<User2Role> list1 = user2RoleDao.selectList(query1);
 		Set<User> list = new HashSet();
 		for(User2Role data:list1) {
-			list.add(baseMapper.selectById(data.getUerId()));
+			list.add(baseMapper.selectById(data.getUserId()));
 		}
 		return list;
 	}
@@ -104,4 +129,90 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 		return new PageUtil(page);
 	}
 
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean create(Map<String, Object> param) {
+		User newUser = new User();
+		Role role = roleService.getByName(Constant.NORMAL_USER);
+		if(role==null) {
+			role = new Role();
+			role.setName(Constant.NORMAL_USER);
+			roleService.save(role);
+			boolean isExist = false;
+			Set<Permission> permissions = permissionService.getByRoleName(role.getName());
+			if(permissions.isEmpty()) {
+				for(Permission entity:permissions) {
+					if(entity.equals(Constant.PERMISSION_LOGIN)) {
+						isExist = true;
+					}
+				}
+			}
+			if(!isExist) {
+				Permission permission = new Permission();
+				permission.setName(Constant.PERMISSION_LOGIN);
+				permissionService.save(permission);
+				Role2Permission r2p = new Role2Permission();
+				r2p.setPermissionId(permission.getId());
+				r2p.setRoleId(role.getId());
+				role2PermissionService.save(r2p);
+			}
+		}
+		newUser.setUsername((String)param.get(Constant.USER_NAME));
+		newUser.setPassword(ShiroUtil.sha256((String)param.get(Constant.PASSWORD), newUser.getUsername()));
+		newUser.setPhone((String)param.get(Constant.PHONE));
+		newUser.setEmail((String)param.get(Constant.EMAIL));
+		newUser.setGender((String)param.get(Constant.GENDER));
+		newUser.setName((String)param.get(Constant.NAME));
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			newUser.setBirthday(date.parse((String) param.get(Constant.BIRTHDAY)));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		newUser.setCreateTime(new Date());
+		this.save(newUser);
+		User2Role u2r = new User2Role();
+		
+		u2r.setUserId(newUser.getId());
+		u2r.setRoleId(role.getId());
+		return user2RoleService.save(u2r);
+	}
+	
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public Boolean edit(Map<String, Object> param) {
+		User user = new User();
+		user.setId(Integer.valueOf((String) param.get(Constant.ID)));
+		user.setUsername((String)param.get(Constant.USER_NAME));
+		user.setPhone((String)param.get(Constant.PHONE));
+		user.setEmail((String)param.get(Constant.EMAIL));
+		user.setGender((String)param.get(Constant.GENDER));
+		user.setName((String)param.get(Constant.NAME));
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			user.setBirthday(date.parse((String) param.get(Constant.BIRTHDAY)));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		user.setUpdateTime(new Date());
+		
+		return  this.updateById(user);
+	}
+
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void delete(Map<String,Object> param) {
+		for(Object id :param.values()) {
+			this.removeById(Integer.valueOf(id.toString()));			
+			user2RoleService.removeByUserId(Integer.valueOf(id.toString()));
+		}
+	}
+
+	@Override
+	public User getByPhone(String phone) {
+		QueryWrapper<User> query = new QueryWrapper<User>();
+		query.eq("phone", phone);		
+		return baseMapper.selectOne(query);
+	}
 }

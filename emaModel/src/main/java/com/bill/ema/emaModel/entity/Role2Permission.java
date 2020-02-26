@@ -9,7 +9,7 @@ import lombok.Data;
 @TableName(value="role2permission")
 public class Role2Permission {
 	
-	@TableId(value="id")
+	@TableId
 	private Integer id;
 	
 	private Integer roleId;

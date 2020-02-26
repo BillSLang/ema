@@ -1,6 +1,6 @@
 package com.bill.ema.emaCommon.exception;
 
-import com.bill.ema.emaCommon.response.STATUSCODE;
+import com.bill.ema.emaCommon.response.Statuscode;
 
 //自定义异常
 public class CommonException extends RuntimeException {
@@ -31,7 +31,7 @@ public class CommonException extends RuntimeException {
 		this.code = code;
 	}
 
-	public CommonException(STATUSCODE statusCode) {
+	public CommonException(Statuscode statusCode) {
 		super(statusCode.getMsg());
 		this.msg = statusCode.getMsg();
 		this.code = statusCode.getCode();

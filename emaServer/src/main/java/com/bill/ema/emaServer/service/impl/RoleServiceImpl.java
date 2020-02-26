@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bill.ema.emaCommon.util.Constant;
 import com.bill.ema.emaModel.dao.PermissionDao;
 import com.bill.ema.emaModel.dao.Role2PermissionDao;
 import com.bill.ema.emaModel.dao.RoleDao;
@@ -19,6 +20,7 @@ import com.bill.ema.emaModel.entity.Role;
 import com.bill.ema.emaModel.entity.Role2Permission;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaModel.entity.User2Role;
+import com.bill.ema.emaServer.service.PermissionService;
 import com.bill.ema.emaServer.service.RoleService;
 
 @Service
@@ -32,6 +34,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleSe
 	
 	@Autowired
 	private PermissionDao permissionDao;
+	
+	@Autowired
+	private PermissionService permissionService;
 	
 	@Autowired
 	private UserDao userDao;
@@ -99,6 +104,5 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao,Role> implements RoleSe
 			list.add(baseMapper.selectById(data.getRoleId()));
 		}
 		return list;
-	}
-	
+	}	
 }

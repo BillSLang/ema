@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: emaServer
 Implementation-Version: 1.0.1
-Built-By: ljp
+Built-By: Administrator
 Implementation-Vendor-Id: com.bill.ema
-Build-Jdk: 1.8.0_101
+Build-Jdk: 1.8.0_191
 Implementation-URL: 
 Created-By: Maven Integration for Eclipse
 

@@ -9,29 +9,19 @@
 	<div class="register-main">
 	<div class="register-box">
 		<header class="layui-elip register-header">注册</header>	
-		<form id="registerForm" class="layui-form layui-form-pane">
+		<form id="registerForm" lay-filter="register" class="layui-form layui-form-pane">
 			
 			<div class="layui-form-item">				
-				<label class="layui-form-label layui-icon layui-icon-cellphone"></label>
+				<label class="layui-form-label layui-icon layui-icon-user"></label>
 				<div class="layui-input-block">
-					<input type="text" v-model="username" @change="isUsernameExist" name="username" lay-verify="required|username" placeholder="用户名" autocomplete="off" class="layui-input">
-				</div>
-				<div v-if="flag1==true">
-					<div class="error-tips">				
-						<label class="fa fa-exclamation-circle" v-text=" tips1"></label>				
-					</div>
+					<input type="text" v-model="username" @blur="isUsernameExist" name="username" lay-verify="required|username|isUsernameExist" placeholder="用户名" autocomplete="off" class="layui-input">
 				</div>
 			</div>	
 			
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-rate"></label>
 				<div class="layui-input-block" >	
-					<input type="text" name="email" v-model="email" @change="isEmailExist" lay-verify="required|email" placeholder="邮箱" autocomplete="off" class="layui-input">	
-				</div>
-				<div v-if="flag2==true">
-					<div class="error-tips">				
-						<label class="fa fa-exclamation-circle" v-text=" tips2"></label>				
-					</div>
+					<input type="text" name="email" v-model="email" @blur="isEmailExist" lay-verify="required|email|isEmailExist" placeholder="邮箱" autocomplete="off" class="layui-input">	
 				</div>
 			</div>						
 			
@@ -52,9 +42,30 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-username"></label>
 				<div class="layui-input-block">
-					<input type="text" name="name" lay-verify="required|name" placeholder="昵称" autocomplete="off" class="layui-input">
+					<input type="text" name="name" v-model="name" lay-verify="required|name" placeholder="昵称" autocomplete="off" class="layui-input">
 				</div>
-			</div>								
+			</div>	
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label layui-icon layui-icon-cellphone"></label>
+				<div class="layui-input-block">
+					<input type="text" name="phone" @blur="isPhoneExist()" v-model="phone" lay-verify="required|phone|isPhoneExist" placeholder="手机号" autocomplete="off" class="layui-input">
+				</div>
+			</div>	
+			
+		<div class="layui-form-item">
+			   <label class="layui-form-label">性别</label>
+			   <div class="layui-input-block">
+		      		<input id="male" type="radio" name="gender" v-model="gender" value="男" title="男" checked>
+		      		<input id="female" type="radio" name="gender" v-model="gender"  value="女" title="女" >
+		   	   </div>
+    	</div>	
+    	<div class="layui-form-item">
+    		<label class="layui-form-label">生日</label>
+    		<div class="layui-input-inline">
+	    		<input id="birthday" type="text" name="birthday"  v-model="birthday" class="layui-input">
+	    	</div>
+    	</div>					
 						
 			<div class="layui-form-item">
 				<button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="register">注册</button>				

@@ -28,27 +28,27 @@ public class QueryUtil<T> {
         long curPage = 1;
         long limit = 10;
 
-        if(params.get(CONSTANT.PAGE) != null){
-            curPage = Long.parseLong((String)params.get(CONSTANT.PAGE));
+        if(params.get(Constant.PAGE) != null){
+            curPage = Long.parseLong((String)params.get(Constant.PAGE));
         }
-        if(params.get(CONSTANT.LIMIT) != null){
-            limit = Long.parseLong((String)params.get(CONSTANT.LIMIT));
+        if(params.get(Constant.LIMIT) != null){
+            limit = Long.parseLong((String)params.get(Constant.LIMIT));
         }
 
         //分页对象
         Page<T> page = new Page<>(curPage, limit);
 
         //分页参数
-        params.put(CONSTANT.PAGE, page);
+        params.put(Constant.PAGE, page);
 
         //排序字段
         //防止SQL注入（因为sidx、order是通过拼接SQL实现排序的，会有SQL注入风险）
-        String orderField = SQLFilter.sqlInject((String)params.get(CONSTANT.ORDER_FIELD));
-        String order = (String)params.get(CONSTANT.ORDER);
+        String orderField = SQLFilter.sqlInject((String)params.get(Constant.ORDER_FIELD));
+        String order = (String)params.get(Constant.ORDER);
 
         //前端字段排序
         if(StringUtils.isNotEmpty(orderField) && StringUtils.isNotEmpty(order)){
-            if(CONSTANT.ASC.equalsIgnoreCase(order)) {
+            if(Constant.ASC.equalsIgnoreCase(order)) {
                 return page.setAsc(orderField);
             }else {
                 return page.setDesc(orderField);
@@ -71,26 +71,26 @@ public class QueryUtil<T> {
         long curPage = 1;
         long limit = 10;
         System.out.println("20200110测试1"+params);
-        if (params.get(CONSTANT.PAGE)!=null){
-            curPage=Long.valueOf(params.get(CONSTANT.PAGE).toString());
+        if (params.get(Constant.PAGE)!=null){
+            curPage=Long.valueOf(params.get(Constant.PAGE).toString());
         }
-        if (params.get(CONSTANT.LIMIT)!=null){
-            limit=Long.valueOf(params.get(CONSTANT.LIMIT).toString());
+        if (params.get(Constant.LIMIT)!=null){
+            limit=Long.valueOf(params.get(Constant.LIMIT).toString());
         }
 
         //分页对象
         Page<T> page = new Page<>(curPage, limit);
 
         //前端请求的字段排序
-        if(params.get(CONSTANT.ORDER)!=null && params.get(CONSTANT.ORDER_FIELD)!=null){
+        if(params.get(Constant.ORDER)!=null && params.get(Constant.ORDER_FIELD)!=null){
 
-            SQLFilter.sqlInject((String) params.get(CONSTANT.ORDER_FIELD));
+            SQLFilter.sqlInject((String) params.get(Constant.ORDER_FIELD));
 
 
-            if(CONSTANT.ASC.equalsIgnoreCase(params.get(CONSTANT.ORDER).toString())) {
-                return page.setAsc(params.get(CONSTANT.ORDER_FIELD).toString());
+            if(Constant.ASC.equalsIgnoreCase(params.get(Constant.ORDER).toString())) {
+                return page.setAsc(params.get(Constant.ORDER_FIELD).toString());
             }else {
-                return page.setDesc(params.get(CONSTANT.ORDER_FIELD).toString());
+                return page.setDesc(params.get(Constant.ORDER_FIELD).toString());
             }
         }
 

@@ -10,12 +10,15 @@ var vm = new Vue({
 	},
 	methods:{
 		route(){
-			router.map('/hello',function(){
-				iframe.setAttribute('src','user/user.html')
-			}),
 			router.map('/user',function(){
+				iframe.setAttribute('src','user.html')
+			}),
+			router.map('/hello',function(){
 				iframe.setAttribute('src','hello.html')
 			})
+		},
+		logout(){
+			$.post(baseURL+"/logout")
 		},
 		menuShrink(){
 			console.log("test")

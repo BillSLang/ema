@@ -1,7 +1,5 @@
 package com.bill.ema.emaModel.entity;
 
-import java.util.Set;
-
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -15,5 +13,7 @@ public class Role {
 	private Integer id;
 	private String name;	
 	private String description;
-	private Set<Permission> permissions;
+	/*
+	 * private Set<Permission> permissions;
+	 */
 }

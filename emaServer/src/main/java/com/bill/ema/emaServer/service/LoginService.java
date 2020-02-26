@@ -7,7 +7,6 @@ import com.bill.ema.emaModel.entity.User;
 
 public interface LoginService {
 	public R authentication(Map<String,Object> param);	
-	public R register(User user);
-	public R verifyUseranme(String username);
-	public R verifyEmail(String email);
+	public R register(Map<String,Object> param);
+	
 }

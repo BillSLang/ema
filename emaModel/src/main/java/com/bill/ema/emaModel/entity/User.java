@@ -32,8 +32,12 @@ public class User {
     private String phone;
     
     private String email;
-    
+
     private String qq;
     
-    private Byte enabled = 0;	
+    private Byte enabled = 0;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")    
+    private Date updateTime;
 }

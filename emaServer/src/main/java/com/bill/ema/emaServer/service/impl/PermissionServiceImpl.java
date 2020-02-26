@@ -53,7 +53,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionDao,Permission>
 		QueryWrapper<Role> query0 = new QueryWrapper<Role>();
 		query0.eq("name", roleName);		
 		QueryWrapper<Role2Permission> query1 = new QueryWrapper<Role2Permission>();		
-		query1.eq("roleId", roleDao.selectOne(query0).getName());
+		query1.eq("role_id", roleDao.selectOne(query0).getName());
 		List<Role2Permission> role2PermissionList =  role2PermissionDao.selectList(query1);
 		Set<Permission> permissionSet = new HashSet<Permission>();
 		for(Role2Permission data:role2PermissionList) {

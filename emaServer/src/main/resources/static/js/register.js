@@ -4,28 +4,44 @@ var vm = new Vue({
 		username:"",
 		password:"",
 		affPassword:"",
+		birthday:"",
+		phone:"",
+		name:"",
 		email:"",
+		gender:"",
 		tips1:"",
 		tips2:"",
+		tips3:"",
 		flag1:false,
-		flag2:false
+		flag2:false,
+		flag3:false,
 	},created(){
 		this.submit();
 		this.validate();
 	},
+	mounted(){
+		this.initForm();
+	},
 	methods:{
+		initForm(){
+			form.render(null,'register');
+			layui.laydate.render({
+				elem:"#birthday",
+				position:'fixed',
+				trigger: 'click',
+				format:'yyyy-MM-dd',
+				zIndex: 99999999
+			})
+		},
 		submit(){
 			form.on('submit(register)',data=>{
-				console.log(JSON.stringify(data.field))
 				$.ajax({
 					url:baseURL + "/register",
 					type:"POST",
-					contentType: 'application/json; charset=UTF-8',
-					dataType:'json',
-					data:JSON.stringify(data.field),
+					data:data.field,
 					success(r){
 						layer.msg(r.msg);
-
+						window.location.href = "login.html"
 					},error(r){
 						layer.msg(r.msg);
 					}
@@ -33,9 +49,36 @@ var vm = new Vue({
 			})
 		},
 		validate(){
-			form.verify({				
+			form.verify({
+				isUsernameExist(value,item){
+					$.ajaxSettings.async = false;
+					var msg = "";
+					$.get(baseURL + "/verify/isUsernameExist/"+value,r=>{				
+						if(r.code!=0){
+							msg = r.msg;
+						}
+					})
+					return msg;
+				},isPhoneExist(value,item){	
+						$.ajaxSettings.async = false;
+						var msg = ""
+						$.get(baseURL + "/verify/isPhoneExist/"+value,r=>{				
+							if(r.code!=0){
+								msg = r.msg;
+							}
+						})
+						return msg;
+				},isEmailExist(value,item){
+						$.ajaxSettings.async = false;
+						var msg = ""
+						$.get(baseURL + "/verify/isEmailExist/"+value,r=>{
+							if(r.code!=0){
+								msg = r.msg;
+							}
+						})
+						return msg;
+				},
 				username(value,item){
-					console.log("xx")
 					var username = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
 					if(!username.test(value))
 						return "账号错误";				
@@ -54,22 +97,11 @@ var vm = new Vue({
 					var email = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 					if(!email.test(value))
 						return "邮箱错误"
-				}
-			})
-		},
-		isUsernameExist(){
-			$.get(baseURL + "/verify/isUsernameExist/"+this.username,r=>{				
-				if(r.code!=0){
-					this.tips1 = r.msg;
-					this.flag1 = true;
-				}
-			})
-		},
-		isEmailExist(){
-			$.get(baseURL + "/verify/isEmailExist/"+this.email,r=>{
-				if(r.code!=0){
-					this.tips2 = r.msg;
-					this.flag2 = true;
+				},phone(value,item){
+					var phone = /^[1][0-9]{10}$/;
+					if(!phone.test(value)){
+						return "手机号错误"
+					}
 				}
 			})
 		}

@@ -1,6 +1,7 @@
 package com.bill.ema.emaServer.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,8 +25,16 @@ public class HomeController {
 	}
 
 	@RequestMapping("{page}.html")
-	public String tohello(@PathVariable String page) {
+	public String page1(@PathVariable String page) {
 		System.out.println(page);
+		return page;
+	}
+	
+	@RequestMapping("{page}.html/{id}")
+	public String page2(@PathVariable String page,@PathVariable String id,Model model) {
+		model.addAttribute("id",id);
+		System.out.println("20200226测试");
+		System.out.println(id);
 		return page;
 	}
 

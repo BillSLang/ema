@@ -15,7 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bill.ema.emaCommon.response.R;
-import com.bill.ema.emaCommon.response.STATUSCODE;
+import com.bill.ema.emaCommon.response.Statuscode;
+import com.bill.ema.emaCommon.util.Constant;
 import com.bill.ema.emaModel.entity.User;
 import com.bill.ema.emaServer.service.LoginService;
 import com.bill.ema.emaServer.service.UserService;
@@ -34,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
 		String kaptcha = ShiroUtil.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
 		Integer retry = ShiroUtil.getRetryNum();
 		if (retry > 0||!kaptcha.equals((String)param.get("captcha")))
-			return R.ERROR(STATUSCODE.INVALIDCAPTCHA);
+			return R.ERROR(Statuscode.InvalidCaptcha);
 		Subject subject = SecurityUtils.getSubject();
 		try {
 			if (!subject.isAuthenticated()) {// subject是否已经登录（认证）
@@ -44,17 +45,17 @@ public class LoginServiceImpl implements LoginService {
 				subject.login(token);
 			}
 		} catch (UnknownAccountException e) {
-			return R.ERROR(STATUSCODE.ACCOUNTNOTEXIST);
+			return R.ERROR(Statuscode.AccountNotExist);
 		} catch (IncorrectCredentialsException e) {
-			return R.ERROR(STATUSCODE.ACCOUNTPASSWORDINCORRECT);
+			return R.ERROR(Statuscode.AccountPasswordIncorrect);
 		} catch (LockedAccountException e) {
-			return R.ERROR(STATUSCODE.ACCOUNTHASBEENLOCKED);
+			return R.ERROR(Statuscode.AccountHasBeenLocked);
 		} catch (DisabledAccountException e) {
-			return R.ERROR(STATUSCODE.ACCOUNTHASBEENACTIVE);
+			return R.ERROR(Statuscode.AccountHasBeenActive);
 		} catch (UnsupportedTokenException e) {
-			return R.ERROR(STATUSCODE.CURRUSERNOTPERMISSION);
+			return R.ERROR(Statuscode.CurrUserNotPermission);
 		} catch (AuthenticationException e) {
-			return R.ERROR(STATUSCODE.ACCOUNTVALIDATEFAIL);
+			return R.ERROR(Statuscode.AccountValidatedFail);
 		}
 
 		// 登录成功异步写日志
@@ -64,33 +65,13 @@ public class LoginServiceImpl implements LoginService {
 		}
 		return R.OK("登录成功");
 	}
-
+	
 	@Override
-	public R register(User user) {
-		if(userService.getByUsername(user.getUsername())!=null) {
-			return R.ERROR(STATUSCODE.USERNAMEEXIST);
+	public R register(Map<String,Object> param) {
+		if(userService.getByUsername((String)param.get(Constant.USER_NAME))!=null) {
+			return R.ERROR(Statuscode.UserNameExist);
 		}
-		String passwrod = ShiroUtil.sha256(user.getPassword(), user.getUsername());
-		user.setPassword(passwrod);
-		userService.save(user);
-		System.out.println("202001081050测试注册功能1"+user);
+		userService.create(param);
 		return R.OK("注册成功");
 	}
-
-	@Override
-	public R verifyUseranme(String username) {
-		if(userService.getByUsername(username)!=null)
-			return R.ERROR(STATUSCODE.USERNAMEEXIST);
-		System.out.println(username);
-		return R.OK();
-	}
-
-	@Override
-	public R verifyEmail(String email) {
-		if(userService.getByEmail(email)!=null)
-			return R.ERROR(STATUSCODE.EMAILEXIST);
-		System.out.println(email);
-		return R.OK();
-	}
-
 }

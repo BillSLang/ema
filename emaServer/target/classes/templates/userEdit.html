@@ -2,12 +2,66 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<#include 'head.html'>
 <title></title>
 </head>
 <body>
-<form class="layui-form">
-	<div class=""></div>
+<form id="addForm" lay-filter="addUser" class="layui-form layui-form-pane">
+	<input id="id" name="id" type="hidden" value="${id?default('')}">
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">用户名</label>
+		<div class="layui-input-block">
+			<input type="text" name="username"  v-model="user.username" required lay-verify="username|isUsernameExist" placeholder="请输入用户名" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">昵称</label>
+		<div class="layui-input-block">
+			<input type="text" name="name" v-model="user.name" required placeholder="请输入用户名" class="layui-input">
+		</div>
+	</div>
+	<div v-if="showPassword()">
+	<div class="layui-form-item">
+		<label class="layui-form-label">密码</label>
+		<div class="layui-input-block">
+			<input type="password" name="password" v-model="user.password" required lay-verify="password" placeholder="请输入密码" class="layui-input">
+		</div>
+	</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">电话</label>
+		<div class="layui-input-block">
+			<input type="text" name="phone" v-model="user.phone" required lay-verify="phone|isPhoneExist" placeholder="请输入电话号码" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">邮箱</label>
+		<div class="layui-input-block">
+			<input type="text" name="email"  v-model="user.email" required lay-verify="email|isEmailExist" placeholder="请输入邮箱" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+	    <label class="layui-form-label">性别</label>
+	   <div class="layui-input-block">
+      	<input id="male" type="radio" name="gender" lay-filter="gender" value="男" title="男" >
+      	<input id="female" type="radio" name="gender" lay-filter="gender" value="女" title="女">
+   	   </div>
+    </div>
+    <div class="layui-form-item">
+    		<label class="layui-form-label">生日</label>
+    		<div class="layui-input-inline">
+	    		<input id="birthday" type="text" v-model="user.birthday" lay-verify="required" name="birthday"  class="layui-input">
+	    	</div>
+    </div>
+    <div class="layui-form-item">
+    	<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="confirm">确定</button>
+			<button class="layui-btn layui-btn-primary" @click="cancel()">取消</button>
+		</div>
+	</div>
+    </div>	
 </form>
-
 </body>
+<script type="text/javascript" src="${request.contextPath}/js/user/userEdit.js"></script>
 </html>

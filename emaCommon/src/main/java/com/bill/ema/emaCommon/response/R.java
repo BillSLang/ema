@@ -19,10 +19,10 @@ public class R extends HashMap<String,Object>{
 	}
 	
 	public static R ERROR(String msg) {
-		return ERROR(STATUSCODE.FAIL.getCode(),msg);
+		return ERROR(Statuscode.Fail.getCode(),msg);
 	}
 	
-	public static R ERROR(STATUSCODE sc) {
+	public static R ERROR(Statuscode sc) {
 		R r = new R();
 		r.put("code", sc.getCode());
 		r.put("msg", sc.getMsg());

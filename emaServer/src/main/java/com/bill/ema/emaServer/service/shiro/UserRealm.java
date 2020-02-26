@@ -15,61 +15,72 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.bill.ema.emaCommon.response.STATUSCODE;
-import com.bill.ema.emaCommon.util.CONSTANT;
+import com.bill.ema.emaCommon.response.Statuscode;
+import com.bill.ema.emaCommon.util.Constant;
+import com.bill.ema.emaModel.entity.Permission;
 import com.bill.ema.emaModel.entity.Role;
 import com.bill.ema.emaModel.entity.User;
+import com.bill.ema.emaServer.service.PermissionService;
 import com.bill.ema.emaServer.service.RoleService;
 import com.bill.ema.emaServer.service.UserService;
 
 @Component
-public class UserRealm extends AuthorizingRealm{
+public class UserRealm extends AuthorizingRealm {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RoleService roleService;
-	
+
+	@Autowired
+	private PermissionService permissionService;
+
 	/**
-     * 资源-权限分配 ~ 授权 ~ 需要将分配给当前用户的权限列表塞给shiro的权限字段中去
-     * @param principalCollection
-     * @return
-     */
+	 * 璧勬簮-鏉冮檺鍒嗛厤 ~ 鎺堟潈 ~ 闇�瑕佸皢鍒嗛厤缁欏綋鍓嶇敤鎴风殑鏉冮檺鍒楄〃濉炵粰shiro鐨勬潈闄愬瓧娈典腑鍘�
+	 * 
+	 * @param principalCollection
+	 * @return
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		return null;
 	}
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
+			throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 		System.out.println(token);
 		final String username = token.getUsername();
 		final String password = String.valueOf(token.getPassword());
-		
+
 		User user = userService.getByUsername(username);
-		if(user==null||CONSTANT.NO_ENABLED.equals(user.getEnabled())) {
-			throw new UnknownAccountException(STATUSCODE.ACCOUNTNOTEXIST.getMsg());
+		if (user == null || Constant.NO_ENABLED.equals(user.getEnabled())) {
+			throw new UnknownAccountException(Statuscode.AccountNotExist.getMsg());
 		}
-		
-		if(CONSTANT.SUPER_ADMIN_NAME.equals(user.getUsername())) {
+
+		if (Constant.SUPER_ADMIN.equals(user.getUsername())) {
 			boolean notAccess = true;
 			Set<Role> roles = roleService.listByUsername(username);
-			for(Role role:roles) {
-				if(role.getPermissions().contains("LOGIN")) {
-					notAccess = false;
-					break;
+			for (Role role : roles) {
+				if (role != null) {
+					Set<Permission> permissions = permissionService.getByRoleId(role.getId());
+					if (permissions.isEmpty() == false) {
+						for (Permission entity : permissions)
+							if (entity.getName().equals(Constant.PERMISSION_LOGIN))
+								notAccess = false;
+						break;
+					}
 				}
-				
 			}
-			if(notAccess) {
-				throw new UnsupportedTokenException(STATUSCODE.CURRUSERNOTPERMISSION.getMsg());
+			if (notAccess) {
+				throw new UnsupportedTokenException(Statuscode.CurrUserNotPermission.getMsg());
 			}
 		}
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,password,getName());
-		
-		System.out.println("user:"+user);
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, getName());
+
+		System.out.println("user:" + user);
 		return info;
 	}
 

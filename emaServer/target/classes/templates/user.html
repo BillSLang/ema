@@ -3,10 +3,13 @@
 <head>
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 	<title>用户管理</title>
-	<#include '../head.html'>
+	<#include 'head.html'>
 	<style>
 	.layui-fluid{
 		padding:15px;
+	}
+	.layui-inline {
+	width:250px;
 	}
 	.layui-card .layui-card-header{
 		padding:15px;
@@ -33,7 +36,7 @@
 	</style>
 </head>
 <body>
-<div id="userForm" lay-filter="test0" class="layui-fluid layui-form">
+<div id="userForm" lay-filter="userForm" class="layui-fluid layui-form">
 		<div class="layui-card">
 				<div class="layui-form-item layui-card-header">					
 					<div class="layui-inline">
@@ -53,10 +56,10 @@
 					<div class="layui-inline">
 						<label class="layui-form-label">性别</label>
 						<div class="layui-input-block">
-							<select name="sex" v-model="data.gender">
-								<option value="0">无</option>
-								<option value="1">男</option>
-								<option value="2">女</option>
+							<select name="gender" v-model="data.gender" lay-filter="gender">
+								<option value="未知">未知</option>
+								<option value="男">男</option>
+								<option value="女">女</option>
 							</select>							
 						</div>						
 					</div>	
@@ -66,7 +69,7 @@
 					</div>
 				</div>
 				<div class="layui-card-body" style="height:530px;">							
-					<table id="userTable" class="layui-table" lay-filter="test">			
+					<table id="userTable" class="layui-table" lay-filter="userTable">			
 					</table>				
 				</div>
 		</div>

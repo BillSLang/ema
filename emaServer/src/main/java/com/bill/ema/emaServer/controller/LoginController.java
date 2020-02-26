@@ -41,21 +41,9 @@ public class LoginController {
 	}
 	
 	@PostMapping("/register")
-	public R register(@RequestBody @Validated User user) {
-		System.out.println(user);		
-		return loginService.register(user); 
-	}
-	
-	@GetMapping("/verify/isUsernameExist/{username}")
-	public R isUsernameExist(@PathVariable @Validated String username) {
-		System.out.println(username);
-		return loginService.verifyUseranme(username);
-	}
-	
-	@GetMapping("/verify/isEmailExist/{email}")
-	public R isEmailExist(@PathVariable @Validated String email) {
-		System.out.println(email);
-		return loginService.verifyEmail(email);
+	public R register(@RequestParam @Validated Map<String,Object> param) {
+		System.out.println(param);		
+		return loginService.register(param); 
 	}
 	
 	@RequestMapping("captcha.jpg")

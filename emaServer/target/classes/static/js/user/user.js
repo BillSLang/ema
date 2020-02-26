@@ -11,12 +11,18 @@ var vm = new Vue({
 	mounted(){
 		this.initForm();
 		this.initTable();	
+		this.selectEvent();
 		this.toolbarEvent();
-		this.checkboxEvent();		
 	}
 	,methods:{
 		initForm(){
-			form.render(null,'test0');
+			form.render(null,'userForm');
+			
+		},
+		selectEvent(){
+			form.on('select(gender)',function(data){
+				vm.data.gender = data.value;
+			})
 		},exportData(){
 			console.log(this.tableIns.config.cols)
 			table.exportFile(this.tableIns.config.id, this.tableIns.config.cols, 'xls'); //默认导出 csv，也可以为：xls		}
@@ -33,25 +39,27 @@ var vm = new Vue({
 					    ,icon: 'layui-icon-tips' // 图标类名
 				}],
 				even:true,
-				size:'lg',
+				size:'sg',
 				loading:false,
 				url:baseURL+'/user/list',
-				height:500,
+				height:525,
 				page:true,
 				cols:  [[ // 标题栏
-					{field:'all',title:'全选',width:60,align:'center'
-					,templet: row=>'<input type="checkbox" lay-filter="selected" lay-skin="primary">'}					
-					,{field: 'id', title: 'ID',edit:'text'}
+					{field:'all',title:'全选',width:60,type:'checkbox',align:'center'}	
+					,{field: 'id',hide:true}
+					,{field: 'LAY_INDEX',title:'序号',width:60,templet:row=>row.LAY_INDEX}
 					,{field: 'username', title: '用户名'}
+					,{field: 'name' , title:'昵称',width:60}
 					,{field: 'phone', title: '电话'}
 					,{field: 'email', title: '邮箱'}
+					,{field: 'gender',title: '性别',width:60,align:'center'}
+					,{field:'enabled', title: '状态', width: 60,align:'center'
+					,templet: row=>row.enabled==0?'启动':'关闭'}					
+					,{field: 'birthday',title: '生日'}
 					,{field: 'createTime', title: '创建时间'}
 					,{field: 'updateTime', title: '修改时间'}
-					,{field:'enabled', title: '启动状态', width: 90,align:'center'
-					,templet: row=>'<input type="checkbox" name="zzz" lay-filter="enabled" lay-skin="switch" lay-text="开启|关闭">'}					
 				]],
 				parseData: function(res){ // res 即为原始返回的数据
-					console.log(res)
 				    return {
 				      "code": res.code, // 解析接口状态
 				      "msg": res.msg, // 解析提示文本
@@ -61,12 +69,11 @@ var vm = new Vue({
 				  }
 			});
 		},getParam(){
-			console.log(this.data)
+			
 			var param = {};
 			for(var key in this.data){
 				param[key] = this.data[key];
 			}
-			console.log(param)
 			return param;
 		},refresh(){
 			this.tableIns.reload({where:null});
@@ -78,38 +85,69 @@ var vm = new Vue({
 				}
 			});			
 		},toolbarEvent(){
-			table.on('toolbar(test)', function(obj){
+			table.on('toolbar(userTable)', function(obj){
 				  switch(obj.event){
 				  	case 'export':
 				  		vm.exportData();
 				  	break;
 				    case 'add':
-				      layer.msg('添加');
+				    	vm.addUser();
 				    break;
 				    case 'delete':
-				      layer.msg('删除');
+				    	vm.deleteUser();
 				    break;
 				    case 'update':
-				      layer.msg('编辑');
+				    	if(vm.selectOnce())
+				    		vm.editUser();
 				    break;
 				  };
 			});		
-		},checkboxEvent(){						
-			table.on('row(test)', row=>{
-				var currId = row.data.id;	
-				var enabled = false;
-				var selected = false;
-				form.on('switch(enabled)', data=>{
-					enabled = data.elem.checked;				
-				});
-				form.on('checkbox(selected)',data=>{
-					selected = data.elem.checked;				
-				});
-				console.log("row:"+currId);
-				console.log("enabled:"+enabled)
-				console.log("switch:"+selected)
-			});
+		},selectOnce(){
+			var data = table.checkStatus('userlist').data;
+	    	if(data.length !== 1){
+	    		layer.msg("请选择一个记录进行编辑")
+	    		return false;
+	    	}
+	    	return true;
+		},editUser(){
+			layer.open({
+				type:2,
+				title:'添加用户',
+				content:baseURL+'/userEdit.html/'+table.checkStatus('userlist').data[0].id,
+				area:['300px','400px'],
+				end(){
+					vm.tableIns.reload();
+				}
+			})
+		},addUser(){
+			layer.open({
+				type:2,
+				title:'添加用户',
+				content:baseURL+'/userEdit.html',
+				area:['300px','400px'],
+				end(){
+					vm.tableIns.reload();
+				}
+			})
 			
+		},deleteUser(){
+			layer.open({
+				title:"提示",
+				content:"是否删除该记录",
+				btn:["是","否"],
+				yes:function(index,layero){
+			    	var data = table.checkStatus('userlist').data;
+			    	var param = {};
+			    	for( var i in data){
+			    		console.log(i)
+			    		param[i] = data[i].id;
+			    	}
+			    	console.log(param)
+					$.post(baseURL+'/user/delete',param)
+					vm.tableIns.reload();
+					layer.close(index);
+				}
+			})
 		}
 	}
 })

@@ -27,9 +27,7 @@ var vm = new Vue({
 				})
 			})
 		},
-		refreshCode(){
-			this.src="captcha.jpg?t="+$.now();
-		},validate(){
+		validate(){
 			form.verify({
 				username(value,item){
 					var username = /^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
@@ -53,8 +51,10 @@ var vm = new Vue({
 						return "验证码错误";
 					}
 				}
-	
 			})
+		},
+		refreshCode(){
+			this.src="captcha.jpg?t="+$.now();
 		}
 	}
 })
