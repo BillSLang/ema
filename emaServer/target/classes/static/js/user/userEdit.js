@@ -25,7 +25,6 @@ var vm = new Vue({
 			if(this.user.id!=""){
 				console.log(this.user.id)
 				await $.post(baseURL+"/user/info/"+this.user.id,r=>{
-					console.log("20200226测试")
 					this.user = r.data;
 				})
 			}

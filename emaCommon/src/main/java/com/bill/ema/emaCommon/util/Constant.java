@@ -8,7 +8,7 @@ public final class Constant {
 	public final static Byte ENABLED = 0;
 	//当前页码
     public static final String PAGE = "page";
-
+ 
     //每页显示记录数
     public static final String LIMIT = "limit";
 	  //排序字段
@@ -31,7 +31,7 @@ public final class Constant {
     
 	public static final String PHONE = "phone";
 	
-	public static final String NORMAL_USER = "Normal_User";
+	public static final String NORMAL_USER = "USER";
 	
 	public static final String PERMISSION_LOGIN = "LOGIN";
 	public static final String NAME = "name";

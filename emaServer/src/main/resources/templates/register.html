@@ -14,14 +14,14 @@
 			<div class="layui-form-item">				
 				<label class="layui-form-label layui-icon layui-icon-user"></label>
 				<div class="layui-input-block">
-					<input type="text" v-model="username" @blur="isUsernameExist" name="username" lay-verify="required|username|isUsernameExist" placeholder="用户名" autocomplete="off" class="layui-input">
+					<input type="text" v-model="username"  name="username" lay-verify="required|username|isUsernameExist" placeholder="用户名" autocomplete="off" class="layui-input">
 				</div>
 			</div>	
 			
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-rate"></label>
 				<div class="layui-input-block" >	
-					<input type="text" name="email" v-model="email" @blur="isEmailExist" lay-verify="required|email|isEmailExist" placeholder="邮箱" autocomplete="off" class="layui-input">	
+					<input type="text" name="email" v-model="email"  lay-verify="required|email|isEmailExist" placeholder="邮箱" autocomplete="off" class="layui-input">	
 				</div>
 			</div>						
 			
@@ -49,7 +49,7 @@
 			<div class="layui-form-item">
 				<label class="layui-form-label layui-icon layui-icon-cellphone"></label>
 				<div class="layui-input-block">
-					<input type="text" name="phone" @blur="isPhoneExist()" v-model="phone" lay-verify="required|phone|isPhoneExist" placeholder="手机号" autocomplete="off" class="layui-input">
+					<input type="text" name="phone" v-model="phone" lay-verify="required|phone|isPhoneExist" placeholder="手机号" autocomplete="off" class="layui-input">
 				</div>
 			</div>	
 			

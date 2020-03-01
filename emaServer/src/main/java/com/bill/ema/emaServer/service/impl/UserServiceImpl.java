@@ -2,6 +2,7 @@ package com.bill.ema.emaServer.service.impl;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -165,6 +166,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 		}
 
 		User newUser = new User(param);
+		newUser.setCreateTime(new Date());
 		this.save(newUser);
 		User2Role u2r = new User2Role();
 		
@@ -177,6 +179,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 	@Transactional(rollbackFor = Exception.class)
 	public Boolean edit(Map<String, Object> param) {
 		User user = new User(param);
+		user.setUpdateTime(new Date());
 		return  this.updateById(user);
 	}
 

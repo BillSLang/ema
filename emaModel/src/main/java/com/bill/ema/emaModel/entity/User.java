@@ -12,11 +12,9 @@ import com.bill.ema.emaCommon.util.Constant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 
 @Data
 @TableName(value = "user")
-@Slf4j
 public class User implements UserAction{
 
 	@TableId(value = "id")
@@ -51,23 +49,24 @@ public class User implements UserAction{
 	}
 	
 	public User(Map<String, Object> param) {
-		SimpleDateFormat date = new SimpleDateFormat(Constant.DATE_FORMAT);
-		try {
-			if (param.get(Constant.ID) == null)
-				throw new NullPointerException();
-			if(param.get(Constant.ID)!="")
-				this.setId(Integer.valueOf(param.get(Constant.ID).toString()));
-			this.setUsername(param.get(Constant.USER_NAME).toString());
-			this.setPhone(param.get(Constant.PHONE).toString());
-			this.setEmail(param.get(Constant.EMAIL).toString());
-			this.setGender(param.get(Constant.GENDER).toString());
-			this.setName(param.get(Constant.NAME).toString());
-			this.setBirthday(date.parse(param.get(Constant.BIRTHDAY).toString()));
-			this.setUpdateTime(new Date());
-		} catch (ParseException e) {
-			log.error("获取的数据的日期格式错误");
-		} catch (NullPointerException e) {
-			log.error("获取的数据存在空值");
-		}
+		
+			SimpleDateFormat sdf = new SimpleDateFormat(Constant.DATE_FORMAT);
+			if(param.get(Constant.ID)!=null&&param.get(Constant.ID)!="")
+				this.id = Integer.valueOf(param.get(Constant.ID).toString());
+			
+			if(param.get(Constant.PASSWORD)!="")
+				this.password = param.get(Constant.PASSWORD).toString();
+			this.username = param.get(Constant.USER_NAME).toString();
+			this.phone = param.get(Constant.PHONE).toString();
+			this.email = param.get(Constant.EMAIL).toString();
+			this.gender = param.get(Constant.GENDER).toString();
+			this.name = param.get(Constant.NAME).toString();
+			if(param.get(Constant.BIRTHDAY)!=null&&param.get(Constant.BIRTHDAY).toString()!="")
+				try {
+					this.birthday =  sdf.parse(param.get(Constant.BIRTHDAY).toString());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 }
