@@ -1,5 +1,6 @@
 package com.bill.ema.emaServer.service.impl;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
@@ -14,34 +15,56 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bill.ema.emaCommon.exception.NullCaptchaException;
+import com.bill.ema.emaCommon.exception.NullPasswordException;
+import com.bill.ema.emaCommon.exception.NullUsernameException;
 import com.bill.ema.emaCommon.response.R;
 import com.bill.ema.emaCommon.response.Statuscode;
 import com.bill.ema.emaCommon.util.Constant;
-import com.bill.ema.emaModel.entity.User;
+import com.bill.ema.emaCommon.util.TransformUtil;
 import com.bill.ema.emaServer.service.LoginService;
+import com.bill.ema.emaServer.service.PermissionService;
+import com.bill.ema.emaServer.service.RoleService;
 import com.bill.ema.emaServer.service.UserService;
 import com.bill.ema.emaServer.service.shiro.ShiroUtil;
 import com.google.code.kaptcha.Constants;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class LoginServiceImpl implements LoginService {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private PermissionService permissionService;
 	
 	@Override
 	public R authentication(Map<String, Object> param) {
 		// 校验验证码
 		String kaptcha = ShiroUtil.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
 		Integer retry = ShiroUtil.getRetryNum();
-		if (retry > 0||!kaptcha.equals((String)param.get("captcha")))
-			return R.ERROR(Statuscode.InvalidCaptcha);
 		Subject subject = SecurityUtils.getSubject();
+		//验证用户名、密码、验证码是否空
 		try {
+			if(param.get(Constant.CAPTCHA)==null)
+				throw new NullCaptchaException();
+			if(param.get(Constant.USER_NAME)==null)
+				throw new NullUsernameException();
+			if(param.get(Constant.PASSWORD)==null)
+				throw new NullPasswordException();	
+			if (!(kaptcha.equals(param.get(Constant.CAPTCHA).toString())))
+				return R.ERROR(Statuscode.InvalidCaptcha);
+			System.out.println(subject.isAuthenticated());
 			if (!subject.isAuthenticated()) {// subject是否已经登录（认证）
-				UsernamePasswordToken token = new UsernamePasswordToken((String) param.get("username"),
-						(String) param.get("password"));
-				ShiroUtil.setRetryNum(++retry);
+				UsernamePasswordToken token = new UsernamePasswordToken(param.get(Constant.USER_NAME).toString(),
+						 param.get(Constant.PASSWORD).toString());
+				//ShiroUtil.setRetryNum(++retry);
 				subject.login(token);
 			}
 		} catch (UnknownAccountException e) {
@@ -56,11 +79,21 @@ public class LoginServiceImpl implements LoginService {
 			return R.ERROR(Statuscode.CurrUserNotPermission);
 		} catch (AuthenticationException e) {
 			return R.ERROR(Statuscode.AccountValidatedFail);
+		}catch(NullCaptchaException e) {
+			return R.ERROR(Statuscode.CaptchaIsNull);
+		}catch(NullUsernameException e) {
+			return R.ERROR(Statuscode.UsernameIsNull);
+		}catch(NullPasswordException e) {
+			return R.ERROR(Statuscode.PasswordIsNull);
 		}
 
 		// 登录成功异步写日志
 		if (subject.isAuthenticated()) {
-			ShiroUtil.setRetryNum(0);
+			Integer id = userService.getByUsername(param.get(Constant.USER_NAME).toString()).getId();
+			ShiroUtil.setSessionAttribute("roles", TransformUtil.nameSet(roleService.listByUserId(id)));
+			ShiroUtil.setSessionAttribute("permissions", TransformUtil.nameSet(permissionService.listByUserId(id)));
+			//ShiroUtil.setRetryNum(0);
+			log.info(new Date()+"   用户"+param.get(Constant.USER_NAME).toString()+"登陆成功。");
 			// 写日志
 		}
 		return R.OK("登录成功");
@@ -72,6 +105,6 @@ public class LoginServiceImpl implements LoginService {
 			return R.ERROR(Statuscode.UserNameExist);
 		}
 		userService.create(param);
-		return R.OK("注册成功");
+		return R.OK(Constant.MESSAGE_REGISTER_SUCCESS);
 	}
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<#include '../head.html'>
+<title></title>
+</head>
+<body>
+<form id="addForm" lay-filter="addAuthorization" class="layui-form layui-form-pane">
+	<input id="id" name="id" type="hidden" value="${id?default('')}">
+	
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">用户</label>
+		<div class="layui-input-block" name="users" id="userIds">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">角色</label>
+		<div class="layui-input-block">
+			<input type="text" name="roleName" :value="authorization.roleName" readonly  class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">权限</label>
+		<div class="layui-input-block" name="permissions" id="permissionIds">
+		</div>
+	</div>
+    <div class="layui-form-item">
+    	<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="confirm">确定</button>
+			<input type="button" class="layui-btn layui-btn-primary" @click="cancel()" value="取消">
+		</div>
+	</div>
+    </div>	
+</form>
+</body>
+<script type="text/javascript" src="${request.contextPath}/js/authorization/authorizationEdit.js"></script>
+</html>

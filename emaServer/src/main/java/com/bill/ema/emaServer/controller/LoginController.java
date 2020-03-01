@@ -56,8 +56,10 @@ public class LoginController {
 		//生成图片验证码
 		BufferedImage image = producer.createImage(text);		
 		//保存到shiro session
+
 		ShiroUtil.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY,text);
 		
+
 		ServletOutputStream out = response.getOutputStream();
 		ImageIO.write(image,"jpg",out);		
 	}

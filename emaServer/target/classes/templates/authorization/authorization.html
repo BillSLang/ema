@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Access-Control-Allow-Origin" content="*" />
+	<title>用户管理</title>
+	<#include '../head.html'>
+	<style>
+	.layui-fluid{
+		padding:15px;
+	}
+	.layui-inline {
+	width:250px;
+	}
+	.layui-card .layui-card-header{
+		padding:15px;
+	}
+	.layui-card-body .layui-card-item{
+		padding:4px 8px;
+		border: 1px solid #e6e6e6;
+		background-color:#f2f2f2;
+	}
+	.layui-card-body .layui-table{
+		margin-top:0;
+	}
+	.layui-form-item{
+		margin:0;
+	}
+	.title{
+	    margin-left: 5px;
+		color:#676A6C;
+		font-weight:700;
+	}
+	table div{
+	margin:0;
+	}
+	</style>
+</head>
+<body>
+<div id="authorizationForm" lay-filter="authorizationForm" class="layui-fluid layui-form">
+		<div class="layui-card">
+				<div class="layui-form-item layui-card-header">	
+				<div class="layui-inline">
+						<label class="layui-form-label">用户名</label>
+						<div class="layui-input-block">
+							<input type="text" name="username" placeholder="用户名"
+								:value="data.username" autocomplete="off" class="layui-input">
+						</div>
+					</div>				
+					<div class="layui-inline">
+						<label class="layui-form-label">角色</label>
+						<div class="layui-input-block">
+							<input type="text" name="roleName" placeholder="角色"
+								:value="data.roleName" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">权限</label>
+						<div class="layui-input-block">
+							<input type="text" name="permissionName" placeholder="角色名"
+								:value="data.permissionName" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline" style="float:right;">				
+						<button class="layui-btn" type="button" @click="submit()" >查询</button>
+						<button class="layui-btn" type="button" @click="refresh()" >刷新</button>
+					</div>
+				</div>
+				<div class="layui-card-body" style="height:530px;">							
+					<table id="authorizationTable" class="layui-table" lay-filter="authorizationTable">			
+					</table>				
+				</div>
+		</div>
+	</div>	
+</body>
+	<script type="text/html" id="toolbar" >
+		<div class="layui-btn-container">
+			<button class="layui-btn layui-btn-sm" lay-event="export">导出</button> 
+			<@shiro.hasAnyPermissions name="ADMIN">		
+  			<button class="layui-btn layui-btn-sm" lay-event="authorization">授权</button>
+			</@shiro.hasAnyPermissions>
+ 		</div>
+	</script>
+	<script type="text/javascript" src="${request.contextPath}/js/authorization/authorization.js"></script>
+</html>

@@ -23,6 +23,18 @@ public class ValidateController {
 		return validateService.verifyUseranme(username);
 	}
 	
+	@GetMapping("/isPermissionnameExist/{username}")
+	public R isPermissionExist(@PathVariable @Validated String username) {
+		System.out.println(username);
+		return validateService.verifyPermissionname(username);
+	}
+	
+	@GetMapping("/isRolenameExist/{rolename}")
+	public R isRolenameExist(@PathVariable @Validated String rolename) {
+		System.out.println(rolename);
+		return validateService.verifyRoleanme(rolename);
+	}
+	
 	@GetMapping("/isEmailExist/{email}")
 	public R isEmailExist(@PathVariable @Validated String email) {
 		System.out.println(email);

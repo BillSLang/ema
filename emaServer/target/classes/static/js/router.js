@@ -14,8 +14,8 @@
 	 */
 	Router.prototype.reloadPage = function(){
 		this.curUrl = location.hash.substring(1)||'/';
-		this.routes[this.curUrl]();
 		console.log(this.routes);
+		this.routes[this.curUrl]();
 	}	
 	/*
 	 * 路由注册方法

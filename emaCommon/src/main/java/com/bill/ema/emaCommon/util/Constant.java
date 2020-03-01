@@ -38,5 +38,15 @@ public final class Constant {
 	public static final String BIRTHDAY = "birthday";
 	public static final String GENDER = "gender";
 	public static final String ID = "id";
+	public static final String DESCRIPTION = "description";
+	public static final String MESSAGE_REGISTER_SUCCESS = "注册成功";
+	public static final String CAPTCHA = "captcha";
+	public static final String DATE_FORMAT = "yyyy-MM-dd";
+	public static final String PERMISSIONS = "permissions";
+	public static final String ROLE_NAME = "roleName";
+	public static final String PERMISSION_NAME = "permissionName";
+	public static final String USERS = "users";
+	public static final String ROLES = "roles";
+
     
 }

@@ -70,7 +70,6 @@ public class QueryUtil<T> {
         //当前第几页、每页显示的条目
         long curPage = 1;
         long limit = 10;
-        System.out.println("20200110测试1"+params);
         if (params.get(Constant.PAGE)!=null){
             curPage=Long.valueOf(params.get(Constant.PAGE).toString());
         }

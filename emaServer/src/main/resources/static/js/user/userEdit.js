@@ -85,6 +85,7 @@ var vm = new Vue({
 				isUsernameExist(value,item){
 					$.ajaxSettings.async = false;
 					var msg = "";
+					if(!value==vm.user.username)
 					$.get(baseURL + "/verify/isUsernameExist/"+value,r=>{				
 						if(r.code!=0){
 							msg = r.msg;
@@ -94,6 +95,7 @@ var vm = new Vue({
 				},isPhoneExist(value,item){	
 						$.ajaxSettings.async = false;
 						var msg = "";
+						if(!value==vm.user.phone)
 						$.get(baseURL + "/verify/isPhoneExist/"+value,r=>{				
 							if(r.code!=0){
 								msg = r.msg;
@@ -103,6 +105,7 @@ var vm = new Vue({
 				},isEmailExist(value,item){
 						$.ajaxSettings.async = false;
 						var msg = "";
+						if(!value==vm.user.email)
 						$.get(baseURL + "/verify/isEmailExist/"+value,r=>{
 							if(r.code!=0){
 								msg = r.msg;

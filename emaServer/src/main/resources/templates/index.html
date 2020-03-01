@@ -20,7 +20,7 @@
 					    <dl class="layui-nav-child">
 					      <dd><a href="javascript:;">修改信息</a></dd>
 					      <dd><a href="javascript:;">安全管理</a></dd>
-					      <dd><a href="${request.contextPath}/logout" >退了</a></dd>
+					      <dd><a href="${request.contextPath}/logout" >注销</a></dd>
 					    </dl>
 					 </li>
 				</ul>
@@ -40,6 +40,18 @@
 							<dd>1</dd>
 						</dl>
 					</li>
+					<li data-name="food" class="layui-nav-item">
+						<a href="javascript:;" >
+							<i class="layui-icon layui-icon-fire">
+								<cite>食品</cite>
+							</i>
+						</a>
+						<dl class="layui-nav-child">
+							<dd><a href="#/food">食物管理</a></dd>
+							<dd><a href="#/role">类型管理</a></dd>
+							<dd><a href="#/permission">xx管理</a></dd>
+						</dl>
+					</li>
 					<li data-name="user" class="layui-nav-item">
 						<a href="javascript:;" >
 							<i class="layui-icon layui-icon-user">
@@ -48,8 +60,8 @@
 						</a>
 						<dl class="layui-nav-child">
 							<dd><a href="#/user">用户管理</a></dd>
-							<dd><a href="#">角色管理</a></dd>
-							<dd><a href="#">权限管理</a></dd>
+							<dd><a href="#/role">角色管理</a></dd>
+							<dd><a href="#/permission">权限管理</a></dd>
 						</dl>
 					</li>
 					<li data-name="set" class="layui-nav-item">
@@ -64,20 +76,24 @@
 							<dd>1</dd>
 						</dl>
 					</li>
+					<@shiro.hasPermission name="ADMIN">
 					<li data-name="auz" class="layui-nav-item">
-						<a href="" >
+						<a href="#/authorization" >
 							<i class="layui-icon layui-icon-auz">
 								<cite>授权</cite>
 							</i>
 						</a>						
 					</li>
-					<li data-name="est" class="layui-nav-item">
-						<a href="#/user" >
+					</@shiro.hasPermission>
+					<@shiro.hasRole name="ADMIN">
+					<li data-name="test" class="layui-nav-item">
+						<a href="#/permission" >
 							<i class="layui-icon layui-icon-auz">
 								<cite>测试</cite>
 							</i>
 						</a>						
 					</li>
+					</@shiro.hasRole>
 				</ul>
 			</div>
 		</div>

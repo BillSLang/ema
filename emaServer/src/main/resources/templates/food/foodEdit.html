@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<#include '../head.html'>
+<title></title>
+</head>
+<body>
+<form id="addForm" lay-filter="addfood" class="layui-form layui-form-pane">
+	<input id="id" name="id" type="hidden" value="${id?default('')}">
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">食品名字</label>
+		<div class="layui-input-block">
+			<input type="text" name="name" :value="food.name" required lay-verify="isFoodnameExist" placeholder="请输入食品名字" class="layui-input">
+		</div>
+	</div>
+    <div class="layui-form-item">
+    	<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="confirm">确定</button>
+			<button class="layui-btn layui-btn-primary" @click="cancel()">取消</button>
+		</div>
+	</div>
+    </div>	
+</form>
+</body>
+<script type="text/javascript" src="${request.contextPath}/js/food/foodEdit.js"></script>
+</html>

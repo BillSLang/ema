@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bill.ema.emaModel.dao.FoodDao" >
+<select id="selectForPage" resultType="com.bill.ema.emaModel.entity.Food">
+	SELECT * 
+	FROM food
+	WHERE id>0 AND name!='未知'
+	<if test="param.name!=null and param.name!=''">
+	AND name LIKE CONCAT ('%',#{param.name},'%')
+	</if>
+</select>
+
 </mapper>

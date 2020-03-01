@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class RouterController {
 
 	@RequestMapping(value = { "index.html", "/" })
 	public String home() {
@@ -26,15 +26,23 @@ public class HomeController {
 
 	@RequestMapping("{page}.html")
 	public String page1(@PathVariable String page) {
-		System.out.println(page);
 		return page;
+	}
+	
+	@RequestMapping("{parent}/{page}.html")
+	public String page3(@PathVariable String parent,@PathVariable String page) {
+		return parent+"/"+page;
+	}
+	
+	@RequestMapping("{parent}/{page}.html/{id}")
+	public String page4(@PathVariable String parent,@PathVariable String page,@PathVariable String id,Model model) {
+		model.addAttribute("id",id);
+		return parent+"/"+page;
 	}
 	
 	@RequestMapping("{page}.html/{id}")
 	public String page2(@PathVariable String page,@PathVariable String id,Model model) {
 		model.addAttribute("id",id);
-		System.out.println("20200226测试");
-		System.out.println(id);
 		return page;
 	}
 

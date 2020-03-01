@@ -36,6 +36,12 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+		<dependency>
+		    <groupId>net.mingsoft</groupId>
+		    <artifactId>shiro-freemarker-tags</artifactId>
+		    <version>0.1</version>
+		</dependency>
+		<!-- shiro-freemarker-tags end -->
         <!--freemarker-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -11,7 +11,19 @@ var vm = new Vue({
 	methods:{
 		route(){
 			router.map('/user',function(){
-				iframe.setAttribute('src','user.html')
+				iframe.setAttribute('src','user/user.html')
+			}),
+			router.map('/role',function(){
+				iframe.setAttribute('src','role/role.html')
+			}),
+			router.map('/permission',function(){
+				iframe.setAttribute('src','permission/permission.html')
+			}),
+			router.map('/authorization',function(){
+				iframe.setAttribute('src','authorization/authorization.html')
+			}),
+			router.map('/food',function(){
+				iframe.setAttribute('src','food/food.html')
 			}),
 			router.map('/hello',function(){
 				iframe.setAttribute('src','hello.html')

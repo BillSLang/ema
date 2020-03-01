@@ -12,7 +12,12 @@ public enum Statuscode {
 	CurrUserNotPermission(1006,"当前用户没有权限"),
 	UserNameExist(1007,"用户名已存在，请重新输入用户名"),
 	EmailExist(1008,"邮箱地址已存在，请重新输入邮箱地址"), 
-	PhoneExist(1009,"手机号已存在，请重新输入手机号");
+	PhoneExist(1009,"手机号已存在，请重新输入手机号"), 
+	RolenameExist(1010,"角色名已存在，请重新输入角色名"), 
+	CaptchaIsNull(1011,"验证码不能为空"), 
+	UsernameIsNull(1012,"用户名不能为空"),
+	PasswordIsNull(1013,"密码不能为空"), 
+	PermissionnameExist(1014,"权限名已存在，请重新输入权限名");
 	
 	private Integer code;
 	private String msg;

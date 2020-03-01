@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<#include 'head.html'>
+<#include '../head.html'>
 <title></title>
 </head>
 <body>
@@ -12,33 +12,33 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">用户名</label>
 		<div class="layui-input-block">
-			<input type="text" name="username"  v-model="user.username" required lay-verify="username|isUsernameExist" placeholder="请输入用户名" class="layui-input">
+			<input type="text" name="username" :value="user.username" required lay-verify="username|isUsernameExist" placeholder="请输入用户名" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">昵称</label>
 		<div class="layui-input-block">
-			<input type="text" name="name" v-model="user.name" required placeholder="请输入用户名" class="layui-input">
+			<input type="text" name="name" :value="user.name"  required placeholder="请输入用户名" class="layui-input">
 		</div>
 	</div>
 	<div v-if="showPassword()">
 	<div class="layui-form-item">
 		<label class="layui-form-label">密码</label>
 		<div class="layui-input-block">
-			<input type="password" name="password" v-model="user.password" required lay-verify="password" placeholder="请输入密码" class="layui-input">
+			<input type="password" name="password" required lay-verify="password" placeholder="请输入密码" class="layui-input">
 		</div>
 	</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">电话</label>
 		<div class="layui-input-block">
-			<input type="text" name="phone" v-model="user.phone" required lay-verify="phone|isPhoneExist" placeholder="请输入电话号码" class="layui-input">
+			<input type="text" name="phone" :value="user.phone" required lay-verify="phone|isPhoneExist" placeholder="请输入电话号码" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">邮箱</label>
 		<div class="layui-input-block">
-			<input type="text" name="email"  v-model="user.email" required lay-verify="email|isEmailExist" placeholder="请输入邮箱" class="layui-input">
+			<input type="text" name="email"  :value="user.email" required lay-verify="email|isEmailExist" placeholder="请输入邮箱" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
@@ -51,7 +51,7 @@
     <div class="layui-form-item">
     		<label class="layui-form-label">生日</label>
     		<div class="layui-input-inline">
-	    		<input id="birthday" type="text" v-model="user.birthday" lay-verify="required" name="birthday"  class="layui-input">
+	    		<input id="birthday" type="text" :value="user.birthday" lay-verify="required" name="birthday"  class="layui-input">
 	    	</div>
     </div>
     <div class="layui-form-item">

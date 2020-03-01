@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
 
 import com.bill.ema.emaServer.service.shiro.UserRealm;
 
-
 @Configuration
 public class ShiroConfig {
 	
@@ -89,4 +88,5 @@ public class ShiroConfig {
         advisor.setSecurityManager(securityManager);
         return advisor;
     }
+	
 }

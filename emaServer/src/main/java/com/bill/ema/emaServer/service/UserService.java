@@ -14,8 +14,8 @@ import com.bill.ema.emaModel.entity.User;
 public interface UserService extends IService<User>{
 	User getByUsername(String username);
 	User getByEmail(String email);
-	Set<User> getByRoleId(Integer roleId);
-	Set<User> getByRoleName(String roleName);
+	Set<User> listByRoleId(Integer roleId);
+	Set<User> listByRoleName(String roleName);
 	Set<Permission> getAllPermission(Integer id);
 	PageUtil queryPage(Map<String,Object> param);
 	Boolean create(Map<String, Object> param);
