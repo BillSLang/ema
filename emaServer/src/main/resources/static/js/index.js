@@ -31,6 +31,21 @@ var vm = new Vue({
 			router.map('/producer',function(){
 				iframe.setAttribute('src','producer/producer.html')
 			}),
+			router.map('/productCode',function(){
+				iframe.setAttribute('src','productCode/productCode.html')
+			}),
+			router.map('/brand',function(){
+				iframe.setAttribute('src','brand/brand.html')
+			}),
+			router.map('/storeMethod',function(){
+				iframe.setAttribute('src','storeMethod/storeMethod.html')
+			}),
+			router.map('/taste',function(){
+				iframe.setAttribute('src','taste/taste.html')
+			}),
+			router.map('/unit',function(){
+				iframe.setAttribute('src','unit/unit.html')
+			}),
 			router.map('/hello',function(){
 				iframe.setAttribute('src','hello.html')
 			})
