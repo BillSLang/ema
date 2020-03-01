@@ -47,15 +47,19 @@
 						</div>
 					</div>
 					<div class="layui-inline">
-						<label class="layui-form-label">性别</label>
+						<label class="layui-form-label">类型</label>
 						<div class="layui-input-block">
-							<select name="gender" v-model="data.gender" lay-filter="gender">
-								<option value="未知">未知</option>
-								<option value="男">男</option>
-								<option value="女">女</option>
-							</select>							
-						</div>						
-					</div>	
+							<input type="text" name="foodType" placeholder="类型"
+								v-model="data.foodType" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">商家</label>
+						<div class="layui-input-block">
+							<input type="text" name="producer" placeholder="商家"
+								v-model="data.producer" autocomplete="off" class="layui-input">
+						</div>
+					</div>
 					<div class="layui-inline" style="float:right;">				
 						<button class="layui-btn" type="button" @click="submit()" >查询</button>
 						<button class="layui-btn" type="button" @click="refresh()" >刷新</button>

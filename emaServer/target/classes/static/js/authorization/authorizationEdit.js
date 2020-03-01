@@ -28,67 +28,48 @@ var vm = new Vue({
 			this.authorization.username = str[1];
 			await $.post(baseURL+"/authorization/info/"+this.authorization.id,r=>{
 				this.authorization = r.data;
-				console.log(this.authorization)
 			})
 			await $.post(baseURL + '/permission/all',r=>{
 				this.permissions = r.data
 			})
 			await $.post(baseURL + '/user/all',r=>{
-				console.log(r.data)
 				this.users = r.data
 			})
 		},
 		initSelectM(){
-			layui.config({
-				base:moudle+'/lib/layui_extends/'
-			}).use('xmSelect',args=>{
-				var xmSelect = layui.xmSelect;
-				xmSelect({
-					elem:'#permissionIds',
-					data:vm.permissions,
-					width:400,
-					delimiter:',',
-					selected:vm.authorization.permissionIds,
-					name:'permissions',
-					tips:'请选择权限'
-				});
-				xmSelect({
-					elem:'#userIds',
-					data:vm.users,
-					width:400,
-					delimiter:',',
-					selected:vm.authorization.userIds,
+				xmSelect.render({
+					el:'#userIds',
 					name:'users',
-					tips:'请选择用户',
-					field:{idName:'id',titleName:'username'}
-				});
-			})
-			
-			
-			/*layui.config({
-				base:moudle + '/lib/layui_extends/'
-			}).use('selectM',args=>{
-				var selectM = layui.selectM;
-				selectM({
-					elem:'#permissionIds',
-					data:vm.permissions,
-					width:400,
-					delimiter:',',
-					selected:vm.authorization.permissionIds,
-					name:'permissions',
-					tips:'请选择权限'
-				});
-				selectM({
-					elem:'#userIds',
+					paging:true,
+					pageSize:5,
+					//pageRemote: true,
+					pageEmptyShow: false,
+					filterable:true,
 					data:vm.users,
-					width:400,
-					delimiter:',',
-					selected:vm.authorization.userIds,
-					name:'users',
-					tips:'请选择用户',
-					field:{idName:'id',titleName:'username'}
+					initValue:vm.authorization.userIds,
+					prop:{
+						name:'username',
+						value:'id'
+					},
+					theme:{
+						color:'#1E9FFF'
+					}
+				});	
+				xmSelect.render({
+					el:'#permissionIds',
+					name:'permissions',
+					paging:true,
+					pageSize:5,
+					filterable:true,
+					data:vm.permissions,
+					initValue:vm.authorization.permissionIds,
+					prop:{
+						value:'id'
+					},
+					theme:{
+						color:'#FF5722'
+					}
 				});
-			})*/
 		},
 		submit(){
 			form.on('submit(confirm)',data=>{

@@ -121,10 +121,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 	}
 	
 	public PageUtil queryPage(Map<String,Object> param){
-		IPage<User> page1 = new QueryUtil<User>().getQueryPage(param);
-		IPage<UserVo> page2 = new QueryUtil<UserVo>().getQueryPage(param);
+		IPage<User> page = new QueryUtil<User>().getQueryPage(param);
 		
-		List<User> list = baseMapper.selectForPage(page1, param);
+		List<User> list = baseMapper.selectForPage(page, param);
 		List<UserVo> list2 = new ArrayList();
 		list.forEach(entity->{
 			UserVo userVo = new UserVo(entity);
@@ -133,8 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 			));
 			list2.add(userVo);
 		});
-		page2.setRecords(list2);
-		return new PageUtil(page2);
+		return new PageUtil(page,list2);
 	}
 
 	@Override

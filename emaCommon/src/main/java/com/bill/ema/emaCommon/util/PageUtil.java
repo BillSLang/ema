@@ -21,4 +21,12 @@ public class PageUtil {
         this.current = (int)page.getCurrent();
         this.totalPage = (int)page.getPages();
     }
+	
+	public PageUtil(IPage<?> page,List<?> list) {
+        this.list = list;
+        this.totalCount = (int)page.getTotal();
+        this.pageSize = (int)page.getSize();
+        this.current = (int)page.getCurrent();
+        this.totalPage = (int)page.getPages();
+    }
 }

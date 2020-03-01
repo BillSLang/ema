@@ -3,6 +3,8 @@ var vm = new Vue({
 	data:{
 		data:{
 			name:'',
+			foodType:'',
+			producer:''
 		},
 		eData:'',
 		tableIns:''
@@ -43,8 +45,16 @@ var vm = new Vue({
 					,{field: 'id',hide:true}
 					,{field: 'LAY_INDEX',title:'序号',width:60,templet:row=>row.LAY_INDEX,align:'center'}
 					,{field: 'name' , title:'名字',width:130,align:'center'}
+					,{field: 'foodType' , title:'类型',width:130,align:'center'}
+					,{field: 'producer' , title:'商家',width:130,align:'center'}
+					,{field: 'productCode' , title:'产品标准号',width:130,align:'center'}
+					,{field: 'brand' , title:'品牌',width:90,align:'center'}
+					,{field: 'storeMethod' , title:'保存方法',width:130,align:'center'}
+					,{field: 'taste' , title:'味道',width:90,align:'center'}
+					,{field: 'expire' , title:'保质期',align:'center'}
 				]],
 				parseData: function(res){ // res 即为原始返回的数据
+					console.log(res.data.list)
 				    return {
 				      'code': res.code, // 解析接口状态
 				      'msg': res.msg, // 解析提示文本
@@ -57,7 +67,6 @@ var vm = new Vue({
 		          }
 			});
 		},getParam(){
-			
 			var param = {};
 			for(var key in this.data){
 				param[key] = this.data[key];
@@ -65,7 +74,8 @@ var vm = new Vue({
 			return param;
 		},refresh(){
 			this.tableIns.reload({where:null});
-		},submit(){			
+		},submit(){		
+			console.log(this.getParam())
 			this.tableIns.reload({
 				where:this.getParam(),
 				page:{
@@ -82,6 +92,7 @@ var vm = new Vue({
 				    	vm.addFood();
 				    break;
 				    case 'delete':
+				    	if(vm.selectOnceMore())
 				    	vm.deleteFood();
 				    break;
 				    case 'update':
@@ -97,12 +108,20 @@ var vm = new Vue({
 	    		return false;
 	    	}
 	    	return true;
+		},selectOnceMore(){
+			var data = table.checkStatus('foodlist').data;
+			console.log(data.length)
+	    	if(data.length == 0){
+	    		layer.msg('请选择至少一个记录')
+	    		return false;
+	    	}
+	    	return true;
 		},editFood(){
 			layer.open({
 				type:2,
 				title:'添加用户',
 				content:baseURL+'/food/foodEdit.html/'+table.checkStatus('foodlist').data[0].id,
-				area:['300px','400px'],
+				area:['500px','550px'],
 				end(){
 					vm.tableIns.reload();
 				}
@@ -112,7 +131,7 @@ var vm = new Vue({
 				type:2,
 				title:'添加用户',
 				content:baseURL+'/food/foodEdit.html',
-				area:['300px','400px'],
+				area:['500px','550px'],
 				end(){
 					vm.tableIns.reload();
 				}
@@ -123,7 +142,7 @@ var vm = new Vue({
 				title:'提示',
 				content:'是否删除该记录',
 				btn:['是','否'],
-				yes:function(index,layero){
+				async yes(index,layero){
 			    	var data = table.checkStatus('foodlist').data;
 			    	var param = {};
 			    	for( var i in data){
@@ -131,8 +150,8 @@ var vm = new Vue({
 			    		param[i] = data[i].id;
 			    	}
 			    	console.log(param)
-					$.post(baseURL+'/food/delete',param)
-					vm.tableIns.reload();
+					await $.post(baseURL+'/food/delete',param)
+					await vm.tableIns.reload();
 					layer.close(index);
 				}
 			})

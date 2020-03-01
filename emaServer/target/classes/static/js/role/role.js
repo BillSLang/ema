@@ -81,6 +81,7 @@ var vm = new Vue({
 				    	vm.addRole();
 				    break;
 				    case 'delete':
+				    	if(vm.selectOnceMore())
 				    	vm.deleteRole();
 				    break;
 				    case 'update':
@@ -89,6 +90,14 @@ var vm = new Vue({
 				    break;
 				  };
 			});		
+		},selectOnceMore(){
+			var data = table.checkStatus('rolelist').data;
+			console.log(data.length)
+	    	if(data.length == 0){
+	    		layer.msg('请选择至少一个记录')
+	    		return false;
+	    	}
+	    	return true;
 		},selectOnce(){
 			var data = table.checkStatus('rolelist').data;
 	    	if(data.length !== 1){
@@ -122,7 +131,7 @@ var vm = new Vue({
 				title:'提示',
 				content:'是否删除该记录',
 				btn:['是','否'],
-				yes:function(index,layero){
+				async yes(index,layero){
 			    	var data = table.checkStatus('rolelist').data;
 			    	var param = {};
 			    	for( var i in data){
@@ -130,8 +139,8 @@ var vm = new Vue({
 			    		param[i] = data[i].id;
 			    	}
 			    	console.log(param)
-					$.post(baseURL+'/role/delete',param)
-					vm.tableIns.reload();
+					await $.post(baseURL+'/role/delete',param)
+					await vm.tableIns.reload();
 					layer.close(index);
 				}
 			})

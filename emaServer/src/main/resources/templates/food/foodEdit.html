@@ -15,6 +15,53 @@
 			<input type="text" name="name" :value="food.name" required lay-verify="isFoodnameExist" placeholder="请输入食品名字" class="layui-input">
 		</div>
 	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">描述</label>
+		<div class="layui-input-block">
+			<input type="text" name="description" :value="food.description"  placeholder="请输入食品名字" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">类型</label>
+		<div class="layui-input-block" name="foodType" id="foodTypeIds">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">商家</label>
+		<div class="layui-input-block" name="producer" id="producerIds">
+		</div>
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">产品码</label>
+		<div class="layui-input-block" name="prductCode" id="productCodeIds">
+		</div>
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">品牌</label>
+		<div class="layui-input-block" name="brand" id="brandIds">
+		</div>
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">保存方法</label>
+		<div class="layui-input-block" name="storeMethod" id="storeMethodIds">
+		</div>
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">味道</label>
+		<div class="layui-input-block" name="taste" id="tasteIds">
+		</div>
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">保质期</label>
+		<div class="layui-input-block" name="expire" id="expireIds">
+		</div>
+	</div>
+	
     <div class="layui-form-item">
     	<div class="layui-input-block">
 			<button class="layui-btn" lay-submit lay-filter="confirm">确定</button>

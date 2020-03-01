@@ -25,6 +25,12 @@ var vm = new Vue({
 			router.map('/food',function(){
 				iframe.setAttribute('src','food/food.html')
 			}),
+			router.map('/foodType',function(){
+				iframe.setAttribute('src','foodType/foodType.html')
+			}),
+			router.map('/producer',function(){
+				iframe.setAttribute('src','producer/producer.html')
+			}),
 			router.map('/hello',function(){
 				iframe.setAttribute('src','hello.html')
 			})

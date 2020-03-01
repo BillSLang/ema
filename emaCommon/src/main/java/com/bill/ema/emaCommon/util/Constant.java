@@ -47,6 +47,20 @@ public final class Constant {
 	public static final String PERMISSION_NAME = "permissionName";
 	public static final String USERS = "users";
 	public static final String ROLES = "roles";
+	public static final String FOOD_TYPE = "foodType";
+	public static final String PRODUCER = "producer";
+	public static final String FOOD_TYPE_ID = "foodTypeId";
+	public static final String STORE_METHOD_ID = "storeMethodId";
+	public static final String BRAND_ID = "brandId";
+	public static final String PRODUCER_ID = "producerId";
+	public static final String PRODUCT_CODE_ID = "productCodeId";
+	public static final String TASTE_ID = "tasteId";
+	public static final String EXPIRE_ID = "expireId";
+	public static final String PARENT_ID = "parentId";
+	public static final String ADDRESS_ID = "addressId";
+	public static final String LICENSE = "license";
+	public static final String ADDRESS = "address";
+
 
     
 }

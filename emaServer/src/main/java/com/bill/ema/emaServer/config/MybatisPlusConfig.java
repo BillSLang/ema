@@ -1,4 +1,4 @@
-package com.bill.ema.emaServer.controller;
+package com.bill.ema.emaServer.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -121,6 +121,7 @@ var vm = new Vue({
 				    	vm.addUser();
 				    break;
 				    case 'delete':
+				    	if(vm.selectOnceMore())
 				    	vm.deleteUser();
 				    break;
 				    case 'update':
@@ -133,6 +134,14 @@ var vm = new Vue({
 			var data = table.checkStatus('userlist').data;
 	    	if(data.length !== 1){
 	    		layer.msg('请选择一个记录进行编辑')
+	    		return false;
+	    	}
+	    	return true;
+		},selectOnceMore(){
+			var data = table.checkStatus('userlist').data;
+			console.log(data.length)
+	    	if(data.length == 0){
+	    		layer.msg('请选择至少一个记录')
 	    		return false;
 	    	}
 	    	return true;
@@ -162,16 +171,15 @@ var vm = new Vue({
 				title:'提示',
 				content:'是否删除该记录',
 				btn:['是','否'],
-				yes:function(index,layero){
+				async yes(index,layero){
 			    	var data = table.checkStatus('userlist').data;
 			    	var param = {};
 			    	for( var i in data){
 			    		console.log(i)
 			    		param[i] = data[i].id;
 			    	}
-			    	console.log(param)
-					$.post(baseURL+'/user/delete',param)
-					vm.tableIns.reload();
+					await $.post(baseURL+'/user/delete',param)
+					await vm.tableIns.reload();
 					layer.close(index);
 				}
 			})
