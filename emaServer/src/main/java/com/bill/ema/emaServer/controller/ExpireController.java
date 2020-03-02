@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bill.ema.emaCommon.response.R;
+import com.bill.ema.emaCommon.util.TableCol;
 import com.bill.ema.emaModel.entity.Expire;
 import com.bill.ema.emaServer.service.ExpireService;
 import com.bill.ema.emaServer.service.FoodService;
@@ -57,6 +59,8 @@ public class ExpireController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public R all() {
-		return R.OK(ExpireService.list());
+		QueryWrapper<Expire> query = new QueryWrapper();
+		query.ne(TableCol.NAME, "未知");
+		return R.OK(ExpireService.list(query));
 	}
 }

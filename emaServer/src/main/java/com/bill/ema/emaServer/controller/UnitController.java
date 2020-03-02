@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bill.ema.emaCommon.response.R;
+import com.bill.ema.emaCommon.util.TableCol;
 import com.bill.ema.emaModel.entity.Unit;
 import com.bill.ema.emaServer.service.UnitService;
 
@@ -57,6 +59,8 @@ public class UnitController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public R all() {
-		return R.OK(unitService.list());
+		QueryWrapper<Unit> query = new QueryWrapper();
+		query.ne(TableCol.NAME, "未知");
+		return R.OK(unitService.list(query));
 	}
 }

@@ -43,8 +43,23 @@ var vm = new Vue({
 			router.map('/taste',function(){
 				iframe.setAttribute('src','taste/taste.html')
 			}),
+			router.map('/expire',function(){
+				iframe.setAttribute('src','expire/expire.html')
+			}),
 			router.map('/unit',function(){
 				iframe.setAttribute('src','unit/unit.html')
+			}),
+			router.map('/site',function(){
+				iframe.setAttribute('src','site/site.html')
+			}),
+			router.map('/subject',function(){
+				iframe.setAttribute('src','subject/subject.html')
+			}),
+			router.map('/event',function(){
+				iframe.setAttribute('src','event/event.html')
+			}),
+			router.map('/uri',function(){
+				iframe.setAttribute('src','uri/uri.html')
 			}),
 			router.map('/hello',function(){
 				iframe.setAttribute('src','hello.html')

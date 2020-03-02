@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bill.ema.emaCommon.response.R;
+import com.bill.ema.emaCommon.util.TableCol;
+import com.bill.ema.emaModel.entity.Address;
 import com.bill.ema.emaModel.entity.Brand;
 import com.bill.ema.emaServer.service.BrandService;
 
@@ -57,6 +60,8 @@ public class BrandController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public R all() {
-		return R.OK(brandService.list());
+		QueryWrapper<Brand> query = new QueryWrapper();
+		query.ne(TableCol.NAME, "未知");
+		return R.OK(brandService.list(query));
 	}
 }

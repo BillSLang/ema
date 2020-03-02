@@ -90,9 +90,9 @@ public class LoginServiceImpl implements LoginService {
 		// 登录成功异步写日志
 		if (subject.isAuthenticated()) {
 			Integer id = userService.getByUsername(param.get(Constant.USER_NAME).toString()).getId();
-			ShiroUtil.setSessionAttribute("roles", TransformUtil.nameSet(roleService.listByUserId(id)));
-			ShiroUtil.setSessionAttribute("permissions", TransformUtil.nameSet(permissionService.listByUserId(id)));
-			//ShiroUtil.setRetryNum(0);
+			ShiroUtil.setSessionAttribute(Constant.ROLES, TransformUtil.nameSet(roleService.listByUserId(id)));
+			ShiroUtil.setSessionAttribute(Constant.PERMISSIONS, TransformUtil.nameSet(permissionService.listByUserId(id)));
+			ShiroUtil.setSessionAttribute(Constant.USER,userService.getById(id));
 			log.info(new Date()+"   用户"+param.get(Constant.USER_NAME).toString()+"登陆成功。");
 			// 写日志
 		}

@@ -8,7 +8,13 @@ public final class Constant {
 	public final static Byte ENABLED = 0;
 	//当前页码
     public static final String PAGE = "page";
- 
+  
+    public static final Byte PASS = 2;
+     
+    public static final Byte NO_PASS = 1;
+    
+    public static final Byte RE = 0;
+    
     //每页显示记录数
     public static final String LIMIT = "limit";
 	  //排序字段
@@ -60,7 +66,36 @@ public final class Constant {
 	public static final String ADDRESS_ID = "addressId";
 	public static final String LICENSE = "license";
 	public static final String ADDRESS = "address";
-
+	public static final String TYPE = "type";
+	public static final String UNIT_ID = "unitId";
+	public static final String QUANTITY = "quantity";
+	public static final String DOMAIN = "domain";
+	public static final String AUTHOR_ID = "authorId";
+	public static final String CONTENT = "content";
+	public static final String URL = "url";
+	public static final String DATE = "date";
+	public static final String SITE = "site";
+	public static final String SITE_ID = "siteId";
+	public static final String AUTHOR = "author";
+	public static final String FOOD_ID = "foodId";
+	public static final String UNIT = "unit";
+	public static final String FOOD = "food";
+	public static final String PRICE = "price";
+	public static final String SUBJECT_ID = "subjectId";
+	public static final String URI_ID = "uriId";
+	public static final String FOODBATCH_ID = "foodbatchId";
+	public static final String REPORTOR_ID = "reportorId";
+	public static final String AUDITOR_ID = "auditorId";
+	public static final String SUBJECT = "subject";
+	public static final String URI = "uri";
+	public static final String FOODBATCH = "foodbatch";
+	public static final String AUDITOR = "auditor";
+	public static final String REPORTOR = "reportor";
+	public static final String PARENT = "parent";
+	public static final String AUDIT_TIME = "auditTime";
+	public static final String CRAWL_TIME = "crawlTime";
+	public static final String USER = "user";
+	public static final String TITLE = "title";
 
     
 }

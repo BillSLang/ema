@@ -4,16 +4,23 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.bill.ema.emaCommon.util.Constant;
 import com.bill.ema.emaModel.entity.User;
+import com.bill.ema.emaServer.service.UserService;
 
+@Component
 public class ShiroUtil {
 	//加密算法
 	public final static String hashAlgrithmName = "SHA-256";
 	
 	//循环次数
 	public final static int hashInterations = 16;
+	
+	@Autowired
+	private UserService userService;
 	
 	public static String sha256(String password,String salt) {
 		return new SimpleHash(hashAlgrithmName,password,salt,hashInterations).toString();
@@ -31,7 +38,7 @@ public class ShiroUtil {
 	
 	//获取shiro的真正主体
 	public static User getUser() {
-		return (User)SecurityUtils.getSubject().getPrincipal();
+		return (User)getSessionAttribute(Constant.USER);
 	}
 	
 	public static Integer getUserId() {

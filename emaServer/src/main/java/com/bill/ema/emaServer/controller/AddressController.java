@@ -5,7 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bill.ema.emaCommon.response.R;
+import com.bill.ema.emaCommon.util.TableCol;
+import com.bill.ema.emaModel.entity.Address;
 import com.bill.ema.emaServer.service.AddressService;
 
 @RestController
@@ -19,7 +22,9 @@ public class AddressController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public R all() {
-		return R.OK(addressService.list());
+		QueryWrapper<Address> query = new QueryWrapper();
+		query.ne(TableCol.NAME, "未知");
+		return R.OK(addressService.list(query));
 	}
 	
 }

@@ -46,6 +46,13 @@
 								v-model="data.name" autocomplete="off" class="layui-input">
 						</div>
 					</div>
+						<div class="layui-inline">
+						<label class="layui-form-label">单位</label>
+						<div class="layui-input-block">
+							<input type="text" name="unit" placeholder="单位"
+								v-model="data.unit" autocomplete="off" class="layui-input">
+						</div>
+					</div>
 					<div class="layui-inline" style="float:right;">				
 						<button class="layui-btn" type="button" @click="submit()" >查询</button>
 						<button class="layui-btn" type="button" @click="refresh()" >刷新</button>

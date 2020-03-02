@@ -12,13 +12,24 @@
 	<div class="layui-form-item">
 		<label class="layui-form-label">名称</label>
 		<div class="layui-input-block">
-			<input type="text" name="name" :value="expire.name" required lay-verify="expirename|isexpirenameExist" placeholder="请输入用户名" class="layui-input">
+			<input type="text" name="name" :value="expire.name" required lay-verify="expirename|isexpirenameExist" placeholder="请输入名称" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">单位</label>
+		<div class="layui-input-block" name="units" id="unitIds">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">数量</label>
+		<div class="layui-input-block">
+			<input type="text" name="quantity" :value="expire.quantity"  required placeholder="请输入数量" class="layui-input">
 		</div>
 	</div>
 	<div class="layui-form-item">
 		<label class="layui-form-label">描述</label>
 		<div class="layui-input-block">
-			<input type="text" name="description" :value="expire.description" placeholder="请输入用户名" class="layui-input">
+			<input type="text" name="description" :value="expire.description" placeholder="请输入表示" class="layui-input">
 		</div>
 	</div>
     <div class="layui-form-item">

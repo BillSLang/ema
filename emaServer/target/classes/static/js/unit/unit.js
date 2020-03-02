@@ -3,6 +3,7 @@ var vm = new Vue({
 	data:{
 		data:{
 			name:'',
+			type:'',
 			description:''
 		},
 		eData:'',
@@ -42,6 +43,7 @@ var vm = new Vue({
 					,{field: 'id',hide:true}
 					,{field: 'LAY_INDEX',title:'序号',templet:row=>row.LAY_INDEX,align:'center'}
 					,{field: 'name' , title:'名称',align:'center'}
+					,{field: 'type' , title:'类型',align:'center'}
 					,{field: 'description', title: '描述',align:'center'}
 				]],
 				parseData: function(res){ // res 即为原始返回的数据

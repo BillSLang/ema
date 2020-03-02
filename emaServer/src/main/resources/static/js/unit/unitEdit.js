@@ -4,11 +4,14 @@ var vm = new Vue({
 		unit:{
 			id:'',
 			name:'',
-			license:'',
-			addressId:'',
+			type:'',
 			description:''
 		},
-		addresss:''
+		types:[{type:'长度',value:'长度'},
+			{type:'浓度',value:'浓度'},
+			{type:'时间',value:'时间'},
+			{type:'质量',value:'质量'},
+			{type:'价格',value:'价格'}]
 	},
 	mounted(){
 		this.initForm();
@@ -18,7 +21,7 @@ var vm = new Vue({
 	methods:{
 		async initForm(){
 			await this.initData();
-			//await this.initSelect();
+			await this.initSelect();
 			await form.render(null,'addunit');			
 		},
 		async initData(){
@@ -28,10 +31,6 @@ var vm = new Vue({
 					this.unit = r.data;
 				})
 			}	
-			/*await $.post(baseURL + '/address/all',r=>{
-				console.log(r.data)
-				this.addresss = r.data
-			})*/
 		},
 		submit(){
 			form.on('submit(confirm)',data=>{
@@ -45,20 +44,15 @@ var vm = new Vue({
 		},
 		initSelect(){
 			xmSelect.render({
-				el:'#addressIds',
-				name:'addressId',
+				el:'#typeIds',
+				name:'type',
 				radio: true,
 				clickClose: true,	
-				paging:true,
-				pageSize:5,
-				data:vm.addresss,
+				data:vm.types,
 				layVerify: 'required',
-				initValue:[vm.unit.addressId],
-				// pageRemote: true,
-				pageEmptyShow: false,
-				filterable:true,
+				initValue:[vm.unit.type],
 				prop:{
-					value:'id'
+					name:'type'
 				},
 				theme:{
 					color:'#1E9FFF'

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<#include '../head.html'>
+<title></title>
+</head>
+<body>
+<form id="addForm" lay-filter="addevent" class="layui-form layui-form-pane">
+	<input id="id" name="id" type="hidden" value="${id?default('')}">
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">名称</label>
+		<div class="layui-input-block">
+			<input type="text" name="name" :value="event.name" required lay-verify="eventname|iseventnameExist" placeholder="请输入用户名" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">描述</label>
+		<div class="layui-input-block">
+			<input type="text" name="description" :value="event.description" placeholder="请输入用户名" class="layui-input">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">一批食品</label>
+		<div class="layui-input-block" name="foodbatchs" id="foodbatchIds">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">资源</label>
+		<div class="layui-input-block" name="uris" id="uriIds">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">涉事主体</label>
+		<div class="layui-input-block" name="subjects" id="subjectIds">
+		</div>
+	</div>
+    <div class="layui-form-item">
+    	<div class="layui-input-block">
+			<button class="layui-btn" lay-submit lay-filter="confirm">确定</button>
+			<input type="button" class="layui-btn layui-btn-primary" @click="cancel()" value="取消">
+		</div>
+	</div>
+    </div>	
+</form>
+</body>
+<script type="text/javascript" src="${request.contextPath}/js/event/eventEdit.js"></script>
+</html>

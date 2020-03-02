@@ -4,11 +4,11 @@ var vm = new Vue({
 		expire:{
 			id:'',
 			name:'',
-			license:'',
-			addressId:'',
+			quantity:'',
+			unitId:'',
 			description:''
 		},
-		addresss:''
+		units:''
 	},
 	mounted(){
 		this.initForm();
@@ -18,7 +18,7 @@ var vm = new Vue({
 	methods:{
 		async initForm(){
 			await this.initData();
-			//await this.initSelect();
+			await this.initSelect();
 			await form.render(null,'addexpire');			
 		},
 		async initData(){
@@ -28,10 +28,10 @@ var vm = new Vue({
 					this.expire = r.data;
 				})
 			}	
-			/*await $.post(baseURL + '/address/all',r=>{
+			await $.post(baseURL + '/unit/all',r=>{
+				this.units = r.data
 				console.log(r.data)
-				this.addresss = r.data
-			})*/
+			})
 		},
 		submit(){
 			form.on('submit(confirm)',data=>{
@@ -45,15 +45,15 @@ var vm = new Vue({
 		},
 		initSelect(){
 			xmSelect.render({
-				el:'#addressIds',
-				name:'addressId',
+				el:'#unitIds',
+				name:'unitId',
 				radio: true,
 				clickClose: true,	
 				paging:true,
 				pageSize:5,
-				data:vm.addresss,
+				data:vm.units,
 				layVerify: 'required',
-				initValue:[vm.expire.addressId],
+				initValue:[vm.expire.unitId],
 				// pageRemote: true,
 				pageEmptyShow: false,
 				filterable:true,

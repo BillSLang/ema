@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bill.ema.emaCommon.response.R;
+import com.bill.ema.emaCommon.util.TableCol;
+import com.bill.ema.emaModel.entity.Taste;
 import com.bill.ema.emaServer.service.FoodService;
 import com.bill.ema.emaServer.service.TasteService;
 
@@ -29,6 +32,8 @@ public class TasteController {
 	@RequestMapping("/all")
 	@ResponseBody
 	public R all() {
-		return R.OK(tasteService.list());
+		QueryWrapper<Taste> query = new QueryWrapper();
+		query.ne(TableCol.NAME, "未知");
+		return R.OK(tasteService.list(query));
 	}
 }

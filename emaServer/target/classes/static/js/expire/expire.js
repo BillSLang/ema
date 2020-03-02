@@ -42,6 +42,8 @@ var vm = new Vue({
 					,{field: 'id',hide:true}
 					,{field: 'LAY_INDEX',title:'序号',templet:row=>row.LAY_INDEX,align:'center'}
 					,{field: 'name' , title:'名称',align:'center'}
+					,{field: 'unit' , title:'单位',align:'center'}
+					,{field: 'quantity' , title:'数量',align:'center'}
 					,{field: 'description', title: '描述',align:'center'}
 				]],
 				parseData: function(res){ // res 即为原始返回的数据
@@ -111,7 +113,7 @@ var vm = new Vue({
 				type:2,
 				title:'添加品牌',
 				content:baseURL+'/expire/expireEdit.html/'+table.checkStatus('expirelist').data[0].id,
-				area:['300px','400px'],
+				area:['500px','400px'],
 				end(){
 					vm.tableIns.reload();
 				}
@@ -121,7 +123,7 @@ var vm = new Vue({
 				type:2,
 				title:'添加品牌',
 				content:baseURL+'/expire/expireEdit.html',
-				area:['300px','400px'],
+				area:['500px','400px'],
 				end(){
 					vm.tableIns.reload();
 				}

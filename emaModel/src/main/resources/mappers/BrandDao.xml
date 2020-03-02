@@ -4,7 +4,7 @@
 <select id="selectForPage" resultType="com.bill.ema.emaModel.entity.Brand">
 	SELECT *
 	FROM brand
-	WHERE id>0 
+	WHERE id>0 and name !='未知'
 	<if test="param.name!=null and param.name!=''">
 	AND name LIKE CONCAT ('%',#{param.name},'%')
 	</if>

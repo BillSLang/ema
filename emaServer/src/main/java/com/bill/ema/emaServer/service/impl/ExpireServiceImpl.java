@@ -3,6 +3,7 @@ package com.bill.ema.emaServer.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,15 +13,24 @@ import com.bill.ema.emaCommon.util.PageUtil;
 import com.bill.ema.emaCommon.util.QueryUtil;
 import com.bill.ema.emaModel.dao.ExpireDao;
 import com.bill.ema.emaModel.entity.Expire;
-import com.bill.ema.emaModel.entity.Expire;
 import com.bill.ema.emaServer.service.ExpireService;
+import com.bill.ema.emaServer.service.UnitService;
 
 @Service("expireServie")
 public class ExpireServiceImpl extends ServiceImpl<ExpireDao,Expire> implements ExpireService{
+	
+	@Autowired
+	private UnitService unitService;
+	
 	@Override
 	public PageUtil queryPage(Map<String, Object> param) {
 		IPage<Expire> page = new QueryUtil<Expire>().getQueryPage(param);
 		List<Expire> list = baseMapper.selectForPage(page, param);
+		list.forEach(entity->{
+			System.out.println("20200302"+entity);
+			if(unitService.getById(entity.getUnitId())!=null)
+				entity.setUnit(unitService.getById(entity.getUnitId()).getName());
+		});
 		return new PageUtil(page,list);
 	}
 

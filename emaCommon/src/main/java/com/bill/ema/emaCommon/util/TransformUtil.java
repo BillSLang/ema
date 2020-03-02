@@ -1,18 +1,20 @@
 package com.bill.ema.emaCommon.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.bill.ema.emaCommon.root.BaseAction;
-import com.bill.ema.emaCommon.root.BaseEntity;
 import com.bill.ema.emaCommon.root.UserAction;
-import com.bill.ema.emaCommon.root.UserEntity;
 
 public class TransformUtil {
+	private static SimpleDateFormat sdf = new SimpleDateFormat(Constant.DATE_FORMAT);
 
 	public static List<Integer> toIntegerList(List<String> data){
 		List<Integer> ret = new ArrayList<Integer>();
@@ -20,6 +22,11 @@ public class TransformUtil {
 			ret.add(Integer.valueOf(str));
 		}
 		return ret;
+	}
+	
+	public static Date toDate(String str) throws ParseException {
+		
+			return sdf.parse(str);
 	}
 	
 	public static List<Integer> toIntegerList(String data){
