@@ -227,20 +227,6 @@ var vm = new Vue({
 		},cancel(){
 			var index = parent.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
 			parent.layer.close(index); // 再执行关闭
-		},validate(){
-			form.verify({
-				isFoodnameExist(value,item){
-					$.ajaxSettings.async = false;
-					var msg = "";
-					if(!value==vm.food.name)
-					$.get(baseURL + "/verify/isFoodnameExist/"+value,r=>{				
-						if(r.code!=0){
-							msg = r.msg;
-						}
-					})
-					return msg;
-				}
-			})
 		}
 	}
 })

@@ -60,11 +60,9 @@ public class LoginServiceImpl implements LoginService {
 				throw new NullPasswordException();	
 			if (!(kaptcha.equals(param.get(Constant.CAPTCHA).toString())))
 				return R.ERROR(Statuscode.InvalidCaptcha);
-			System.out.println(subject.isAuthenticated());
 			if (!subject.isAuthenticated()) {// subject是否已经登录（认证）
 				UsernamePasswordToken token = new UsernamePasswordToken(param.get(Constant.USER_NAME).toString(),
 						 param.get(Constant.PASSWORD).toString());
-				//ShiroUtil.setRetryNum(++retry);
 				subject.login(token);
 			}
 		} catch (UnknownAccountException e) {

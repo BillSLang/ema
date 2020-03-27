@@ -18,10 +18,9 @@
     </properties>
 
   <dependencies>
-        <!-- api -->
         <dependency>
             <groupId>com.bill.ema</groupId>
-            <artifactId>emaApi</artifactId>
+            <artifactId>emaCommon</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

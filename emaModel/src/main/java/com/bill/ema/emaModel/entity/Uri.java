@@ -59,14 +59,9 @@ public class Uri {
 		if(param.get(Constant.SITE)!=null&&param.get(Constant.SITE)!="")
 			this.site =param.get(Constant.SITE).toString();
 		
-		
-		if(param.get(Constant.DATE)!=null&&param.get(Constant.DATE)!="")
-			try {
-				this.date =sdf.parse(param.get(Constant.DATE).toString());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		this.date =new Date();
+			
 		
 		if(param.get(Constant.URL)!=null&&param.get(Constant.URL)!="")
 			this.url =param.get(Constant.URL).toString();

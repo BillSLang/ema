@@ -10,5 +10,4 @@ import com.bill.ema.emaModel.entity.Event;
 
 public interface EventDao extends BaseMapper<Event>{
 	List<Event> selectForPage(IPage<Event> page, Map<String, Object> param);
-
 }

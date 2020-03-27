@@ -5,6 +5,7 @@ var vm = new Vue({
 			id:'',
 			name:'',
 			license:'',
+			domain:'',
 			addressId:'',
 			description:''
 		},
@@ -12,7 +13,6 @@ var vm = new Vue({
 	},
 	mounted(){
 		this.initForm();
-		this.validate();
 		this.submit();
 	},
 	methods:{
@@ -28,10 +28,6 @@ var vm = new Vue({
 					this.site = r.data;
 				})
 			}	
-			/*await $.post(baseURL + '/address/all',r=>{
-				console.log(r.data)
-				this.addresss = r.data
-			})*/
 		},
 		submit(){
 			form.on('submit(confirm)',data=>{
@@ -86,21 +82,6 @@ var vm = new Vue({
 		cancel(){
 			var index = parent.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
 			parent.layer.close(index); // 再执行关闭
-		},
-		validate(){
-			form.verify({
-				issitenameExist(value,item){
-					$.ajaxSettings.async = false;
-					var msg = "";
-					if(!value==vm.site.name)
-					$.get(baseURL + "/verify/issitenameExist/"+value,r=>{				
-						if(r.code!=0){
-							msg = r.msg;
-						}
-					})
-					return msg;
-				}
-			})
 		}
 	}
 })

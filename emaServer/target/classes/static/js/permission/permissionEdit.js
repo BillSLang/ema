@@ -9,7 +9,6 @@ var vm = new Vue({
 	},
 	mounted(){
 		this.initForm();
-		this.validate();
 		this.submit();
 	},
 	methods:{
@@ -58,22 +57,6 @@ var vm = new Vue({
 			console.log()
 			var index = parent.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
 			parent.layer.close(index); // 再执行关闭
-		},
-		validate(){
-			form.verify({
-				isPermissionnameExist(value,item){
-					$.ajaxSettings.async = false;
-					var msg = "";
-					console.log(!value==vm.permission.name)
-					if(!value==vm.permission.name)
-					$.get(baseURL + "/verify/isPermissionnameExist/"+value,r=>{				
-						if(r.code!=0){
-							msg = r.msg;
-						}
-					})
-					return msg;
-				}
-			})
 		}
 	}
 })

@@ -50,7 +50,6 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 	        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-	        System.out.println(ShiroUtil.getSessionAttribute(Constant.ROLES));
 	        authorizationInfo.setRoles((Set<String>) ShiroUtil.getSessionAttribute(Constant.ROLES));
 	        authorizationInfo.setStringPermissions((Set<String>) ShiroUtil.getSessionAttribute(Constant.PERMISSIONS));
 	        return authorizationInfo;
@@ -62,25 +61,21 @@ public class UserRealm extends AuthorizingRealm {
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
 		final String username = token.getUsername();
 		final String password = String.valueOf(token.getPassword());
-		System.out.println("202002282054测试"+password);
 
 		User user = userService.getByUsername(username);
 		if (user == null || Constant.NO_ENABLED.equals(user.getEnabled())) {
 			throw new UnknownAccountException(Statuscode.AccountNotExist.getMsg());
 		}
 		//如果是超级管理员
-		System.out.println("202002282032测试"+user.getUsername());
 		boolean notAccess = true;//true的时候不许链接
 		if(Constant.SUPER_ADMIN.equals(user.getUsername()))
 			notAccess = false;//超级用户允许登陆
 		else {//普通用户验证是否有权限
 			Set<Role> roles = roleService.listByUsername(username);
-			System.out.println("202002282032测试"+roles);
 			if(!roles.isEmpty())
 			for (Role role : roles) {
 				if (role != null) {
 					Set<Permission> permissions = permissionService.listByRoleId(role.getId());
-					System.out.println(permissions);
 					if (permissions.isEmpty() == false) {//权限集合不为空，则查看是否有登陆权限
 						for (Permission entity : permissions)
 							if (entity.getName().equals(Constant.PERMISSION_LOGIN))
@@ -95,7 +90,6 @@ public class UserRealm extends AuthorizingRealm {
 		}
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, getName());
-		System.out.println("user:" + user);
 		return info;
 	}
 

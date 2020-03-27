@@ -16,15 +16,4 @@ public class CollectionUtil {
 		oldC.removeAll(tmp);
 	}
 	
-	@Test
-	public void test() {
-		List<Integer> newC = new ArrayList();
-		List<Integer> oldC = new ArrayList();
-		oldC.add(3);
-		oldC.add(2);
-		oldC.add(4);
-		edit(newC,oldC);
-		System.out.println(newC);
-		System.out.println(oldC);
-	}
 }
