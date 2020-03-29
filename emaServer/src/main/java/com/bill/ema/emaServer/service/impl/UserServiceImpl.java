@@ -145,7 +145,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 			role.setName(Constant.NORMAL_USER);
 			roleService.save(role);
 			boolean isExist = false;
-			
 			Set<Permission> permissions = permissionService.listByRoleName(role.getName());
 			if(permissions.isEmpty()) {
 				for(Permission entity:permissions) {
@@ -164,12 +163,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao,User> implements UserSe
 				role2PermissionService.save(r2p);
 			}
 		}
-
 		User newUser = new User(param);
 		newUser.setCreateTime(new Date());
 		this.save(newUser);
 		User2Role u2r = new User2Role();
-		
 		u2r.setUserId(newUser.getId());
 		u2r.setRoleId(role.getId());
 		return user2RoleService.save(u2r);

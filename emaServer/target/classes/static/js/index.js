@@ -2,7 +2,6 @@ var iframe = document.getElementById('iframe');
 var vm = new Vue({
 	el:'#index',
 	created(){
-		console.log("test")
 		this.route();
 		router.render();	
 		element.render();

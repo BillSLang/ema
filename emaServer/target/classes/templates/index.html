@@ -58,7 +58,6 @@
 							<dd><a href="#/unit">单位管理</a></dd>
 							<dd><a href="#/storeMethod">保存方法管理</a></dd>
 							<dd><a href="#/productCode">产品码管理</a></dd>
-							
 						</dl>
 					</li>
 					<li data-name="user" class="layui-nav-item">
@@ -73,18 +72,6 @@
 							<dd><a href="#/permission">权限管理</a></dd>
 						</dl>
 					</li>
-					<li data-name="set" class="layui-nav-item">
-						<a href="" >
-							<i class="layui-icon layui-icon-set">
-								<cite>设置</cite>
-							</i>
-						</a>
-						<dl class="layui-nav-child">
-							<dd>1</dd>
-							<dd>1</dd>
-							<dd>1</dd>
-						</dl>
-					</li>
 					<@shiro.hasPermission name="ADMIN">
 					<li data-name="auz" class="layui-nav-item">
 						<a href="#/authorization" >
@@ -94,9 +81,9 @@
 						</a>						
 					</li>
 					</@shiro.hasPermission>
-					<@shiro.hasRole name="ADMIN">
+					<@shiro.hasRole name="DEBUG">
 					<li data-name="test" class="layui-nav-item">
-						<a href="#/permission" >
+						<a href="#/test" >
 							<i class="layui-icon layui-icon-auz">
 								<cite>测试</cite>
 							</i>
